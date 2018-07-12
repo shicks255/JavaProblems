@@ -1,0 +1,35 @@
+package CodeWars.eric_interview_question;
+
+/**
+ Class name must be "Main"
+
+ Given a string and an array of characters, write a method to find if there are enough characters in the array to form the string.
+ For example, given the string "apple", the array ['p', 'l', 's', 'h', 'a' 'p', 'e'] should return true and array ['f', 'x', 'a', 'e'] should return false.
+
+ //Use these variables to test with.  arr1 does not contain the required characters to spell "disassemble" but arr2 does.
+ String word = "disassemble";
+ char[] arr1 = { 'd', 'n', 'i', 'k', 't', 't', 'a', 'q', 'w', 'o', 'b', 'x', 'x', 'm', 'z', 'q', 'i', 'j', 'k', 'n'};
+ char[] arr2 = { 'd', 'n', 'e', 'k', 't', 's', 'a', 's', 'w', 'o', 'b', 's', 'x', 'm', 'z', 'l', 'e', 'i', 'k', 'b'};
+
+ System.out.println(contains(word, arr2));
+ */
+
+public class Solution
+{
+
+    public static void main(String[] args)
+    {
+
+    }
+
+
+    public static boolean arrayContainsString(String testString, char[] testArray)
+    {
+        boolean passesTest = false;
+
+
+
+        return passesTest;
+    }
+
+}
