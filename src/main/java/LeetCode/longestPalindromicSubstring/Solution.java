@@ -18,12 +18,12 @@ public class Solution
     {
         int windowLength = s.length();
 
-        while (windowLength > 1)
+        while (windowLength >= 1)
         {
             int windowPanes = (s.length() - windowLength) + 1;
             for (int i = 0; i < windowPanes; i++)
             {
-                String word = s.substring(i, windowLength);
+                String word = s.substring(i, windowLength+i);
                 if (isPalindrome(word))
                     return word;
             }
