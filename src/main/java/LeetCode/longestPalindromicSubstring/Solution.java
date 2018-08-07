@@ -5,14 +5,35 @@ import java.util.Deque;
 
 public class Solution
 {
-
     public static void main(String[] args)
     {
-        boolean isPal = isPalinedrom("toot");
-        System.out.println(isPal);
+        String s = "jglknendplocymmvwtoxvebkekzfdhykknufqdkntnqvgfbahsljkobhbxkvyictzkqjqydczuxjkgecdyhixdttxfqmgksrkyvopwprsgoszftuhawflzjyuyrujrxluhzjvbflxgcovilthvuihzttzithnsqbdxtafxrfrblulsakrahulwthhbjcslceewxfxtavljpimaqqlcbrdgtgjryjytgxljxtravwdlnrrauxplempnbfeusgtqzjtzshwieutxdytlrrqvyemlyzolhbkzhyfyttevqnfvmpqjngcnazmaagwihxrhmcibyfkccyrqwnzlzqeuenhwlzhbxqxerfifzncimwqsfatudjihtumrtjtggzleovihifxufvwqeimbxvzlxwcsknksogsbwwdlwulnetdysvsfkonggeedtshxqkgbhoscjgpiel";
+        String y = "abaythgj";
+
+        System.out.println(longestPalindrome(y));
+
     }
 
-    public static boolean isPalinedrom(String s)
+    public static String longestPalindrome(String s)
+    {
+        int windowLength = s.length();
+
+        while (windowLength > 1)
+        {
+            int windowPanes = (s.length() - windowLength) + 1;
+            for (int i = 0; i < windowPanes; i++)
+            {
+                String word = s.substring(i, windowLength);
+                if (isPalindrome(word))
+                    return word;
+            }
+            windowLength--;
+        }
+
+        return "";
+    }
+
+    public static boolean isPalindrome(String s)
     {
         if (s.length() == 0 || s.length() == 1)
             return true;
