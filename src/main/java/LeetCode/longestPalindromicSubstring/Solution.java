@@ -8,24 +8,20 @@ public class Solution
     public static void main(String[] args)
     {
         String s = "jglknendplocymmvwtoxvebkekzfdhykknufqdkntnqvgfbahsljkobhbxkvyictzkqjqydczuxjkgecdyhixdttxfqmgksrkyvopwprsgoszftuhawflzjyuyrujrxluhzjvbflxgcovilthvuihzttzithnsqbdxtafxrfrblulsakrahulwthhbjcslceewxfxtavljpimaqqlcbrdgtgjryjytgxljxtravwdlnrrauxplempnbfeusgtqzjtzshwieutxdytlrrqvyemlyzolhbkzhyfyttevqnfvmpqjngcnazmaagwihxrhmcibyfkccyrqwnzlzqeuenhwlzhbxqxerfifzncimwqsfatudjihtumrtjtggzleovihifxufvwqeimbxvzlxwcsknksogsbwwdlwulnetdysvsfkonggeedtshxqkgbhoscjgpiel";
-        String y = "abaythgj";
-
-        System.out.println(longestPalindrome(s));
-
+        String y = "ababayathgj";
+        System.out.println(longestPalindrome(y));
     }
 
     public static String longestPalindrome(String s)
     {
         int windowLength = s.length();
-
         while (windowLength >= 1)
         {
             int windowPanes = (s.length() - windowLength) + 1;
             for (int i = 0; i < windowPanes; i++)
             {
                 String word = s.substring(i, windowLength+i);
-                StringBuilder builder = new StringBuilder(word);
-                if (word.equals(builder.reverse().toString()))
+                if (isPalindrome(word))
                     return word;
             }
             windowLength--;
@@ -35,6 +31,15 @@ public class Solution
     }
 
     public static boolean isPalindrome(String s)
+    {
+        for (int i = 0; i < s.length(); i++)
+            if (s.charAt(i) != s.charAt( (s.length()-1)-i) )
+                return false;
+
+        return true;
+    }
+
+    public static boolean isPalindrome2(String s)
     {
         if (s.length() == 0 || s.length() == 1)
             return true;
