@@ -10,7 +10,7 @@ public class Solution
         String s = "jglknendplocymmvwtoxvebkekzfdhykknufqdkntnqvgfbahsljkobhbxkvyictzkqjqydczuxjkgecdyhixdttxfqmgksrkyvopwprsgoszftuhawflzjyuyrujrxluhzjvbflxgcovilthvuihzttzithnsqbdxtafxrfrblulsakrahulwthhbjcslceewxfxtavljpimaqqlcbrdgtgjryjytgxljxtravwdlnrrauxplempnbfeusgtqzjtzshwieutxdytlrrqvyemlyzolhbkzhyfyttevqnfvmpqjngcnazmaagwihxrhmcibyfkccyrqwnzlzqeuenhwlzhbxqxerfifzncimwqsfatudjihtumrtjtggzleovihifxufvwqeimbxvzlxwcsknksogsbwwdlwulnetdysvsfkonggeedtshxqkgbhoscjgpiel";
         String y = "abaythgj";
 
-        System.out.println(longestPalindrome(y));
+        System.out.println(longestPalindrome(s));
 
     }
 
@@ -24,7 +24,8 @@ public class Solution
             for (int i = 0; i < windowPanes; i++)
             {
                 String word = s.substring(i, windowLength+i);
-                if (isPalindrome(word))
+                StringBuilder builder = new StringBuilder(word);
+                if (word.equals(builder.reverse().toString()))
                     return word;
             }
             windowLength--;
