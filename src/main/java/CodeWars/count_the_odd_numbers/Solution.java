@@ -20,11 +20,16 @@ public class Solution
     public static void main(String[] args)
     {
         System.out.println(rowSumOddNumber(4));
+        System.out.println(again(4));
+
     }
 
     public static int rowSumOddNumber(int n)
     {
         int numberToStart = n * (n-1) + 1;
+//                          = n + (n-1) ^ 2
+
+
 
         int answer = numberToStart;
 
@@ -32,6 +37,11 @@ public class Solution
             answer += (numberToStart += 2);
 
         return answer;
+    }
+
+    public static int again(int n)
+    {
+        return n * n * n;
     }
 
 }
