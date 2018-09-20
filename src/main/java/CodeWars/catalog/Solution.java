@@ -54,15 +54,27 @@ public class Solution
 
     public static void main(String[] args)
     {
-        catalog(s, "saw");
-        catalog(s, "ladder");
-        catalog(s, "fan");
-
+//        catalog(s, "prod");
+//        catalog(s, "saw");
+//        catalog(s, "ladder");
+//        catalog(s, "fan");
     }
 
     public static String catalog(String s, String article)
     {
         String answer = "";
+
+        String[] entries = s.split("\n\n");
+
+        for (String entry : entries)
+        {
+            if (entry.contains(article))
+            {
+
+
+            }
+        }
+
 
         return "";
     }
