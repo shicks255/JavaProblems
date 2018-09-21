@@ -17,22 +17,22 @@ public class Solution
         System.out.println(mostWater(new int[]{1,8,6,2,5,4,8,3,7}));
     }
 
-    public static int mostWater(int[] coords)
+    public static int mostWater(int[] height)
     {
         int biggest = 0;
-        int windowSize = coords.length;
+        int windowSize = height.length;
 
         while (windowSize > 1)
         {
-            int panes = (coords.length - windowSize) + 1;
+            int panes = (height.length - windowSize) + 1;
 
             for (int i = 0; i < panes; i++)
             {
                 int leftIndex = i;
                 int rightIndex = i + (windowSize-1);
 
-                int left = coords[leftIndex];
-                int right = coords[rightIndex];
+                int left = height[leftIndex];
+                int right = height[rightIndex];
 
                 int amount = (windowSize-1) * (left > right ? right : left);
                 if (amount > biggest)
