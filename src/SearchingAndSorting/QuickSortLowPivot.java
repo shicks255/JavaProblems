@@ -7,7 +7,7 @@ public class QuickSortLowPivot
 
     public static void main(String[] args)
     {
-        QuickSort quickSort = new QuickSort();
+        QuickSortLowPivot quickSort = new QuickSortLowPivot();
 
         int[] array = new int[]{11,5,4,6,9,15,12,1,2,3};
 
@@ -17,10 +17,43 @@ public class QuickSortLowPivot
 
     public int[] sort(int[] array, int low, int high)
     {
+        if (high - low > 0)
+        {
+            int pivot = pivot(array, low, high);
+
+            sort(array, low, pivot-1);
+            sort(array, pivot+1, high);
+        }
+
+        return array;
     }
 
     private int pivot(int[] array, int low, int high)
     {
+        int pivot = low++;
+
+        while (low < high)
+        {
+            while (array[low] < array[pivot])
+                low++;
+            while (array[high] > array[pivot])
+                high--;
+
+            if (low < high)
+            {
+                int temp = array[low];
+                array[low] = array[high];
+                array[high] = temp;
+                low++;
+                high--;
+            }
+        }
+
+        int temp = array[pivot];
+        array[pivot] = array[low];
+        array[low] = temp;
+
+        return low;
     }
 
 
