@@ -39,7 +39,7 @@ public class QuickSortLowPivot
             while (array[high] > array[pivot])
                 high--;
 
-            if (low < high)
+            if (low <= high)
             {
                 int temp = array[low];
                 array[low] = array[high];
@@ -49,9 +49,9 @@ public class QuickSortLowPivot
             }
         }
 
-        int temp = array[pivot];
-        array[pivot] = array[low];
-        array[low] = temp;
+        int temp = array[low];
+        array[low] = array[pivot];
+        array[pivot] = temp;
 
         return low;
     }
