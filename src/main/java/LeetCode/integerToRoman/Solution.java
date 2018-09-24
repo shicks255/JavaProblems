@@ -42,13 +42,17 @@ public class Solution
     public static void main(String[] args)
     {
         Solution solution = new Solution();
-        System.out.println(solution.intToRoman(50));
+        System.out.println(solution.intToRoman(49));
     }
 
     public String intToRoman(int num)
     {
-        int[] numerals = new int[]{10,5,1};
+        int[] numerals = new int[]{1000,500,100,50,10,5,1};
         Map<Integer, String> roman = new HashMap<>();
+        roman.put(1000, "M");
+        roman.put(500, "L");
+        roman.put(100, "C");
+        roman.put(50, "L");
         roman.put(10, "X");
         roman.put(5, "V");
         roman.put(1, "I");
@@ -60,15 +64,26 @@ public class Solution
         {
             for (Integer numeral : numerals)
             {
-                if (numeral-1 == n)
+                int subtractFactor = 0;
+                if (n < 1000) subtractFactor = 100;
+                if (n < 100) subtractFactor = 10;
+                if (n < 10) subtractFactor = 1;
+
+                if (n - numeral == 0)
                 {
-                    String a = roman.get(1);
-                    a += roman.get(numeral);
-                    n = n - numeral + 1;
-                    return a;
+                    answer += roman.get(numeral);
+                    n =- numeral;
                 }
 
-                if (n > numeral)
+                if (numeral-subtractFactor <= n && n < numeral && n != 0)
+                {
+                    String a = roman.get(subtractFactor);
+                    a += roman.get(numeral);
+                    answer += a;
+                    n = n -numeral + subtractFactor;
+                }
+
+                if (n >= numeral)
                 {
                     if ( n % numeral == 0)
                     {
@@ -82,9 +97,10 @@ public class Solution
                     }
                     if (n % numeral != 0)
                     {
-                        n = n % numeral;
+                        n = n - numeral;
                         answer += roman.get(numeral);
                     }
+                    break;
                 }
             }
         }
