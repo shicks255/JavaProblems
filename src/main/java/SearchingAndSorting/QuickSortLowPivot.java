@@ -4,15 +4,11 @@ import java.util.Arrays;
 
 public class QuickSortLowPivot
 {
-
     public static void main(String[] args)
     {
         QuickSortLowPivot quickSort = new QuickSortLowPivot();
-
-        int[] array = new int[]{11,5,4,6,9,15,12,1,2,3};
-
+        int[] array = new int[]{5, 4 ,3 ,2 ,1,0};
         System.out.println(Arrays.toString(quickSort.sort(array, 0, array.length-1)));
-
     }
 
     public int[] sort(int[] array, int low, int high)
@@ -32,12 +28,18 @@ public class QuickSortLowPivot
     {
         int pivot = low++;
 
-        while (low < high)
+        while (low <= high)
         {
             while (array[low] < array[pivot])
+            {
+                if (low == pivot) break;
                 low++;
+            }
             while (array[high] > array[pivot])
+            {
+                if (high == pivot)  break;
                 high--;
+            }
 
             if (low <= high)
             {

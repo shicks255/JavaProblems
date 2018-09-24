@@ -33,15 +33,63 @@ package main.java.LeetCode.integerToRoman;
 //        Output: "IV"
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Solution
 {
 
+    public static void main(String[] args)
+    {
+        Solution solution = new Solution();
+        System.out.println(solution.intToRoman(50));
+    }
 
     public String intToRoman(int num)
     {
+        int[] numerals = new int[]{10,5,1};
+        Map<Integer, String> roman = new HashMap<>();
+        roman.put(10, "X");
+        roman.put(5, "V");
+        roman.put(1, "I");
 
+        String answer = "";
+        int n = num;
 
-        return "";
+        while (n > 0)
+        {
+            for (Integer numeral : numerals)
+            {
+                if (numeral-1 == n)
+                {
+                    String a = roman.get(1);
+                    a += roman.get(numeral);
+                    n = n - numeral + 1;
+                    return a;
+                }
+
+                if (n > numeral)
+                {
+                    if ( n % numeral == 0)
+                    {
+                        int x = n / numeral;
+                        while (x > 0)
+                        {
+                            answer += roman.get(numeral);
+                            x--;
+                        }
+                        n = 0;
+                    }
+                    if (n % numeral != 0)
+                    {
+                        n = n % numeral;
+                        answer += roman.get(numeral);
+                    }
+                }
+            }
+        }
+
+        return answer;
     }
 
 }

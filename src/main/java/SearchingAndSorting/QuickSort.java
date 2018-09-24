@@ -9,7 +9,8 @@ public class QuickSort
     {
         QuickSort quickSort = new QuickSort();
 
-        int[] array = new int[]{11,5,4,6,9,15,12,1,2,3};
+//        int[] array = new int[]{11,5,4,6,9,15,12,1,2,3};
+        int[] array = new int[]{5,4,3,2,1,0};
 
         System.out.println(Arrays.toString(quickSort.sort(array, 0, array.length-1)));
 
