@@ -7,7 +7,7 @@ public class QuickSortLowPivot
     public static void main(String[] args)
     {
         QuickSortLowPivot quickSort = new QuickSortLowPivot();
-        int[] array = new int[]{1,2,3,4,5};
+        int[] array = new int[]{3,1,2,6,7,4,5};
         System.out.println(Arrays.toString(quickSort.sort(array, 0, array.length-1)));
     }
 
@@ -15,7 +15,7 @@ public class QuickSortLowPivot
     {
         if (high - low > 0)
         {
-            int pivot = pivot(array, low, high);
+            int pivot = pivot2(array, low, high);
 
             sort(array, low, pivot-1);
             sort(array, pivot+1, high);
@@ -27,7 +27,7 @@ public class QuickSortLowPivot
     private int pivot(int[] array, int low, int high)
     {
         int pivot = array[low];
-        int biggest = high+1;
+        int biggest = high;
 
         for (int i = high; i > low+1; i--)
         {
@@ -46,6 +46,29 @@ public class QuickSortLowPivot
         array[high] = temp;
 
         return biggest;
+    }
+
+    public int pivot2(int[] array, int low, int high)
+    {
+        int pivot = array[high];
+        int smallest = low-1;
+
+        for (int i = low; i < high; i++)
+        {
+            if (array[i] < pivot)
+            {
+                smallest++;
+                int temp = array[i];
+                array[i] = array[smallest];
+                array[smallest] = temp;
+            }
+        }
+
+        smallest++;
+        int temp = array[high];
+        array[high] = array[smallest];
+        array[smallest] = temp;
+        return smallest;
     }
 
 
