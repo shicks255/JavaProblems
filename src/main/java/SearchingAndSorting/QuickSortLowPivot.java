@@ -1,4 +1,4 @@
-package SearchingAndSorting;
+package main.java.SearchingAndSorting;
 
 import java.util.Arrays;
 
@@ -7,7 +7,7 @@ public class QuickSortLowPivot
     public static void main(String[] args)
     {
         QuickSortLowPivot quickSort = new QuickSortLowPivot();
-        int[] array = new int[]{5,4,3,2,1};
+        int[] array = new int[]{1,2,3,4,5};
         System.out.println(Arrays.toString(quickSort.sort(array, 0, array.length-1)));
     }
 
@@ -26,26 +26,26 @@ public class QuickSortLowPivot
 
     private int pivot(int[] array, int low, int high)
     {
-        int pivot = array[high];
+        int pivot = array[low];
+        int biggest = high+1;
 
-        int smallest = low-1;
-
-        for (int i = low; i <= high-1; i++)
+        for (int i = high; i > low+1; i--)
         {
-            if (array[i] <= pivot)
+            if (array[i] < pivot)
             {
-                smallest++;
-                int temp = array[smallest];
-                array[smallest] = array[i];
-                array[i] = temp;
+                biggest--;
+                int temp = array[i];
+                array[i] = array[biggest];
+                array[biggest] = temp;
             }
         }
 
-        int temp = array[smallest+1];
-        array[smallest+1] = array[high];
+        biggest--;
+        int temp = array[biggest];
+        array[biggest] = pivot;
         array[high] = temp;
 
-        return smallest+1;
+        return biggest;
     }
 
 
