@@ -1,4 +1,4 @@
-package main.java.SearchingAndSorting;
+package SearchingAndSorting;
 
 import java.util.Arrays;
 
@@ -7,7 +7,8 @@ public class QuickSortLowPivot
     public static void main(String[] args)
     {
         QuickSortLowPivot quickSort = new QuickSortLowPivot();
-        int[] array = new int[]{3,1,2,6,7,4,5};
+        int[] array = new int[]{6,1,2,98,3,5,8};
+//        int[] array = new int[]{7,6,5,4,3,2,1};
         System.out.println(Arrays.toString(quickSort.sort(array, 0, array.length-1)));
     }
 
@@ -15,7 +16,7 @@ public class QuickSortLowPivot
     {
         if (high - low > 0)
         {
-            int pivot = pivot2(array, low, high);
+            int pivot = randomPivot(array, low, high);
 
             sort(array, low, pivot-1);
             sort(array, pivot+1, high);
@@ -24,31 +25,55 @@ public class QuickSortLowPivot
         return array;
     }
 
-    private int pivot(int[] array, int low, int high)
+    private int randomPivot(int[] array, int low, int high)
     {
-        int pivot = array[low];
-        int biggest = high;
+        int pivot = array[(low + high) / 2];
 
-        for (int i = high; i > low+1; i--)
+        while (low < high)
         {
-            if (array[i] < pivot)
+            while (array[low] < pivot)
+                low++;
+            while (array[high] > pivot)
+                high--;
+
+            if (low < high)
             {
-                biggest--;
-                int temp = array[i];
-                array[i] = array[biggest];
-                array[biggest] = temp;
+                int temp = array[low];
+                array[low] = array[high];
+                array[high] = temp;
             }
         }
 
-        biggest--;
-        int temp = array[biggest];
-        array[biggest] = pivot;
-        array[high] = temp;
 
-        return biggest;
+
+        return low;
     }
 
-    public int pivot2(int[] array, int low, int high)
+    private int lowPivot(int[] array, int low, int high)
+    {
+        int pivot = array[low];
+        int largest = high + 1;
+
+        for (int i = high; i > low; i--)
+        {
+            if (array[i] > pivot)
+            {
+                largest--;
+                int temp = array[largest];
+                array[largest] = array[i];
+                array[i] = temp;
+            }
+        }
+
+        largest--;
+        int temp = array[largest];
+        array[largest] = pivot;
+        array[low] = temp;
+
+        return largest;
+    }
+
+    public int highPivot(int[] array, int low, int high)
     {
         int pivot = array[high];
         int smallest = low-1;
