@@ -12,11 +12,16 @@ public class QuickSort
         int[] array1 = new int[]{11,5,4,6,9,15,12,1,2,3};
         int[] array2 = new int[]{5,4,3,2,1,0};
 
-        System.out.println(Arrays.toString(quickSort.sort(array1, 0, array1.length-1)));
-
+        System.out.println(Arrays.toString(quickSort.sort(array1)));
+        System.out.println(Arrays.toString(quickSort.sort(array2)));
     }
 
-    public int[] sort(int[] array, int low, int high)
+    public int[] sort(int[] array)
+    {
+        return sort(array, 0, array.length - 1);
+    }
+
+    private int[] sort(int[] array, int low, int high)
     {
         if (high - low > 0)
         {
