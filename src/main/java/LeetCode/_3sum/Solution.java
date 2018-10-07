@@ -19,14 +19,43 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
-        System.out.println(threeSum(nums));
+        int[] nums = new int[]{-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6};
+        System.out.println(threeSum2(nums));
     }
 
+    public static List<List<Integer>> threeSum2(int[] nums)
+    {
+        Set<List<Integer>> solution = new HashSet<>();
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length-2; i++)
+        {
+            int low = i+1;
+            int high = nums.length-1;
+
+            while (low < high)
+            {
+//                while (low < high && nums[i] + nums[low] + nums[high] != 0)
+//                {
+//
+//                }
+
+                if (low < high)
+                    if (nums[i] + nums[low] + nums[high] == 0)
+                        solution.add(Arrays.asList(nums[i], nums[low], nums[high]));
+
+                low++;
+                high--;
+            }
+        }
+
+        return new ArrayList<>(solution);
+    }
 
     public static List<List<Integer>> threeSum(int[] nums)
     {
         Set<List<Integer>> solutions = new HashSet<>();
+
 
         for (int i = 0; i < nums.length; i++)
         {
@@ -34,6 +63,11 @@ public class Solution
             {
                 int sum = nums[i] + nums[j];
                 int lookingFor = 0 - sum;
+
+                List<Integer> dummyList = Arrays.asList(nums[i], nums[j], lookingFor);
+                Collections.sort(dummyList);
+                if (solutions.contains(dummyList))
+                    continue;
 
                 for (int k = j+1; k < nums.length; k++)
                 {
