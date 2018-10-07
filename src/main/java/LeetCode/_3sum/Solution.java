@@ -13,17 +13,43 @@
 
 package LeetCode._3sum;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class Solution
 {
-    public List<List<Integer>> threeSum(int[] nums)
+    public static void main(String[] args)
     {
-        List<List<Integer>> solutions = new ArrayList<>();
+        int[] nums = new int[]{-1, 0, 1, 2, -1, -4};
+        System.out.println(threeSum(nums));
+    }
 
 
-        return solutions;
+    public static List<List<Integer>> threeSum(int[] nums)
+    {
+        Set<List<Integer>> solutions = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++)
+        {
+            for (int j = i+1; j < nums.length; j++)
+            {
+                int sum = nums[i] + nums[j];
+                int lookingFor = 0 - sum;
+
+                for (int k = j+1; k < nums.length; k++)
+                {
+                    if (nums[k] == lookingFor)
+                    {
+                        List<Integer> list = Arrays.asList(nums[i], nums[j], nums[k]);
+                        Collections.sort(list);
+                        solutions.add(list);
+                    }
+                    continue;
+                }
+            }
+        }
+
+        List<List<Integer>> test = new ArrayList<>(solutions);
+        return test;
     }
 
 }
