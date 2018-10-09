@@ -19,7 +19,7 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        int[] nums = new int[]{-4,-2,-2,-2,0,1,2,2,2,3,3,4,4,6,6};
+        int[] nums = new int[]{0,0,0};
         System.out.println(threeSum2(nums));
     }
 
@@ -35,17 +35,20 @@ public class Solution
 
             while (low < high)
             {
-//                while (low < high && nums[i] + nums[low] + nums[high] != 0)
-//                {
-//
-//                }
+                int sum = 0 - nums[i];
 
-                if (low < high)
-                    if (nums[i] + nums[low] + nums[high] == 0)
-                        solution.add(Arrays.asList(nums[i], nums[low], nums[high]));
-
-                low++;
-                high--;
+                if (sum == nums[low] + nums[high])
+                {
+                    solution.add(Arrays.asList(nums[i], nums[low], nums[high]));
+                    if (nums[low] < sum || nums[low] == nums[low+1])
+                        low++;
+                    else if (nums[high] > sum || nums[high] == nums[high-1])
+                        high--;
+                }
+                else if (nums[low] + nums[high] < sum)
+                    low++;
+                else
+                    high--;
             }
         }
 
