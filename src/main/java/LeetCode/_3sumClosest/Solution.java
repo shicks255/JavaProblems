@@ -19,12 +19,12 @@ public class Solution
 {
     public static void main(String[] args)
     {
-//        System.out.println(threeSumCloset(new int[]{0,2,1,-3}, 1));
-//        System.out.println(threeSumCloset(new int[]{1,1,1,0}, 100));
-//        System.out.println(threeSumCloset(new int[]{1,1,1,0}, -100));
-//        System.out.println(threeSumCloset(new int[]{-1,2,1,-4}, 1));
-//        System.out.println(threeSumCloset(new int[]{0,0,0,0}, 1));
-        System.out.println(threeSumCloset(new int[]{1,1,-1,-1,3}, -1));
+        System.out.println(threeSumCloset(new int[]{0,2,1,-3}, 1)); //should eb 0
+        System.out.println(threeSumCloset(new int[]{1,1,1,0}, 100)); // should be 3
+        System.out.println(threeSumCloset(new int[]{1,1,1,0}, -100)); // should be 2
+        System.out.println(threeSumCloset(new int[]{-1,2,1,-4}, 1)); //should be 2
+        System.out.println(threeSumCloset(new int[]{0,0,0,0}, 1));// should be 0
+        System.out.println(threeSumCloset(new int[]{1,1,-1,-1,3}, -1)); //should be -1
     }
 
     public static int threeSumCloset(int[] nums, int target)
@@ -61,9 +61,9 @@ public class Solution
                     solution = secondTwoNumbers + nums[i];
 
 
-                if (secondTwoNumbers <= target)
+                if (secondTwoNumbers + nums[i] > target)
                     high--;
-                if (secondTwoNumbers >= target)
+                if (secondTwoNumbers + nums[i] <= target)
                     low++;
             }
         }
