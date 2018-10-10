@@ -19,7 +19,12 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(threeSumCloset(new int[]{0,2,1,-3}, 1));
+//        System.out.println(threeSumCloset(new int[]{0,2,1,-3}, 1));
+//        System.out.println(threeSumCloset(new int[]{1,1,1,0}, 100));
+//        System.out.println(threeSumCloset(new int[]{1,1,1,0}, -100));
+//        System.out.println(threeSumCloset(new int[]{-1,2,1,-4}, 1));
+//        System.out.println(threeSumCloset(new int[]{0,0,0,0}, 1));
+        System.out.println(threeSumCloset(new int[]{1,1,-1,-1,3}, -1));
     }
 
     public static int threeSumCloset(int[] nums, int target)
@@ -38,33 +43,27 @@ public class Solution
 
             while (low < high)
             {
-                int secondSum = nums[low] + nums[high];
+                int secondTwoNumbers = nums[low] + nums[high];
 
-                if (secondSum == sum)
-                    solution = nums[i] + secondSum;
+                if (secondTwoNumbers == sum)
+                    solution = nums[i] + secondTwoNumbers;
 
                 if (solution == null)
-                    solution = secondSum + nums[i];
+                    solution = secondTwoNumbers + nums[i];
 
-                if (target > 0)
-                {
-                    int curentDif = target - solution;
-                    int newDif = target - (secondSum + nums[i]);
-                    if (newDif < curentDif)
-                        solution = secondSum + nums[i];
-                }
+                int currentDif = solution - target;
+                int thisDif = (secondTwoNumbers + nums[i]) - target;
 
-                if (target < 0)
-                {
-                    int currentDif = target - solution;
-                    int newDif = target - (secondSum + nums[i]);
-                    if (newDif > currentDif)
-                        solution = secondSum = nums[i];
-                }
+                if (currentDif < 0) currentDif = -currentDif;
+                if (thisDif < 0) thisDif = -thisDif;
 
-                if (secondSum <= target)
+                if (thisDif < currentDif)
+                    solution = secondTwoNumbers + nums[i];
+
+
+                if (secondTwoNumbers <= target)
                     high--;
-                if (secondSum >= target)
+                if (secondTwoNumbers >= target)
                     low++;
             }
         }
