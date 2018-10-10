@@ -13,21 +13,70 @@
 
 package LeetCode._3sumClosest;
 
+import java.util.Arrays;
+
 public class Solution
 {
     public static void main(String[] args)
     {
-
+        System.out.println(threeSumCloset(new int[]{1,1,1,0}, 100));
     }
 
     public static int threeSumCloset(int[] nums, int target)
     {
-        int solution = 0;
+        Integer solution = null;
+        Arrays.sort(nums);
 
+        for (int i = 0; i < nums.length - 2; i++)
+        {
+            if (solution != null && solution == target)
+                return solution;
+            int sum = target - nums[i];
 
+            int low = i+1;
+            int high = nums.length-1;
+
+            while (low < high)
+            {
+                int secondSum = nums[low] + nums[high];
+
+                if (secondSum == sum)
+                    solution = nums[i] + secondSum;
+
+                if (solution == null)
+                    solution = secondSum + nums[i];
+
+                if (solution > 0)
+                    if (solution > secondSum + nums[i])
+                        solution = secondSum + nums[i];
+
+                if (solution < 0)
+                    if (solution < secondSum + nums[i])
+                        solution = secondSum + nums[i];
+
+//                if (target >= 0)
+//                    if (solution > 0)
+//                        if (solution > secondSum + nums[i])
+//                            solution = secondSum + nums[i];
+//                    if (solution < 0)
+//                        if (solution < secondSum + nums[i])
+//                            solution = secondSum + nums[i];
+//
+//                if (target < 0)
+//                    if (solution < 0)
+//                        if (solution < secondSum + nums[i])
+//                            solution = secondSum + nums[i];
+//                    if (solution > 0)
+//                        if (solution > secondSum + nums[i])
+//                            solution = secondSum + nums[i];
+
+                if (secondSum <= target)
+                    high--;
+                if (secondSum >= target)
+                    low++;
+            }
+        }
 
         return solution;
     }
-
-
 }
