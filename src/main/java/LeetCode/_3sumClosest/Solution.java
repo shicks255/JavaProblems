@@ -19,7 +19,7 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(threeSumCloset(new int[]{1,1,1,0}, 100));
+        System.out.println(threeSumCloset(new int[]{0,2,1,-3}, 1));
     }
 
     public static int threeSumCloset(int[] nums, int target)
@@ -46,29 +46,21 @@ public class Solution
                 if (solution == null)
                     solution = secondSum + nums[i];
 
-                if (solution > 0)
-                    if (solution > secondSum + nums[i])
+                if (target > 0)
+                {
+                    int curentDif = target - solution;
+                    int newDif = target - (secondSum + nums[i]);
+                    if (newDif < curentDif)
                         solution = secondSum + nums[i];
+                }
 
-                if (solution < 0)
-                    if (solution < secondSum + nums[i])
-                        solution = secondSum + nums[i];
-
-//                if (target >= 0)
-//                    if (solution > 0)
-//                        if (solution > secondSum + nums[i])
-//                            solution = secondSum + nums[i];
-//                    if (solution < 0)
-//                        if (solution < secondSum + nums[i])
-//                            solution = secondSum + nums[i];
-//
-//                if (target < 0)
-//                    if (solution < 0)
-//                        if (solution < secondSum + nums[i])
-//                            solution = secondSum + nums[i];
-//                    if (solution > 0)
-//                        if (solution > secondSum + nums[i])
-//                            solution = secondSum + nums[i];
+                if (target < 0)
+                {
+                    int currentDif = target - solution;
+                    int newDif = target - (secondSum + nums[i]);
+                    if (newDif > currentDif)
+                        solution = secondSum = nums[i];
+                }
 
                 if (secondSum <= target)
                     high--;
