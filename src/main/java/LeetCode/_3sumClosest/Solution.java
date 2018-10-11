@@ -44,7 +44,7 @@ public class Solution
                 int secondTwoNumbers = nums[low] + nums[high];
 
                 if (secondTwoNumbers == sum)
-                    return secondTwoNumbers + nums[i];
+                    return target;
 
                 if (solution == null)
                     solution = secondTwoNumbers + nums[i];
