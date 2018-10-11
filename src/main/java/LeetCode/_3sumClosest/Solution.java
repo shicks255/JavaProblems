@@ -34,8 +34,6 @@ public class Solution
 
         for (int i = 0; i < nums.length - 2; i++)
         {
-            if (solution != null && solution == target)
-                return solution;
             int sum = target - nums[i];
 
             int low = i+1;
@@ -46,7 +44,7 @@ public class Solution
                 int secondTwoNumbers = nums[low] + nums[high];
 
                 if (secondTwoNumbers == sum)
-                    solution = nums[i] + secondTwoNumbers;
+                    return secondTwoNumbers + nums[i];
 
                 if (solution == null)
                     solution = secondTwoNumbers + nums[i];
@@ -59,7 +57,6 @@ public class Solution
 
                 if (thisDif < currentDif)
                     solution = secondTwoNumbers + nums[i];
-
 
                 if (secondTwoNumbers + nums[i] > target)
                     high--;
