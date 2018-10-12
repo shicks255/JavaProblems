@@ -6,7 +6,7 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(letterCombinations("23"));
+        System.out.println(letterCombinations("234"));
         //["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
     }
 
@@ -22,12 +22,12 @@ public class Solution
         combos.put("8", Arrays.asList("t", "u", "v"));
         combos.put("9", Arrays.asList("w", "x", "y", "z"));
 
-        String[] numbers = digits.split("");
+        String[] phoneNumbers = digits.split("");
 
         List<List<String>> sequences = new ArrayList<>();
 
         int counter = 1;
-        for (String digit : numbers)
+        for (String digit : phoneNumbers)
         {
             List<String> possibleDigits = combos.get(digit);
             sequences.add(possibleDigits);
@@ -37,17 +37,34 @@ public class Solution
         List<String> solution = new ArrayList<>();
 //        Arrays.fill(solution, "");
 
-        int[] counters = new int[numbers.length];
+        int counterIncrementer = phoneNumbers.length-1;
+        int[] counters = new int[phoneNumbers.length];
+
         Arrays.fill(counters, 0);
-        for (int i = 0; i < counter; i++)
+        for (int i = 0; i < counter; i++) //iterate over the amount of spaces were going to need
         {
             String solutionString = "";
 
             for (int j = 0; j < counters.length; j++)
             {
-                solutionString += combos.get(numbers[j]).get(counters[j]);
+                solutionString += combos.get(phoneNumbers[j]).get(counters[j]);
 
-                counters[j]++;
+                if (j == counters.length-1)
+                    counters[j]++;
+                if (combos.get(phoneNumbers[j]).size() == counters[j])
+                {
+                    counters[j] = 0;
+                    if (counterIncrementer > 0)
+                    {
+                        counters[counterIncrementer-1]++;
+                        if (combos.get(phoneNumbers[counterIncrementer]).size() == counters[counterIncrementer - 1])
+                        {
+                            counterIncrementer--;
+                            counters[counterIncrementer] = 0;
+                            counters[counterIncrementer-1]++;
+                        }
+                    }
+                }
             }
 
             solution.add(solutionString);
