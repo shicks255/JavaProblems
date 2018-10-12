@@ -6,7 +6,7 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(letterCombinations("234"));
+        System.out.println(letterCombinations("23"));
         //["ad", "ae", "af", "bd", "be", "bf", "cd", "ce", "cf"]
     }
 
@@ -24,33 +24,35 @@ public class Solution
 
         String[] numbers = digits.split("");
 
-        List<List<String>> lettersToUse = new ArrayList<>();
+        List<List<String>> sequences = new ArrayList<>();
 
-        for (String dig : numbers)
-            lettersToUse.add(combos.get(dig));
+        int counter = 1;
+        for (String digit : numbers)
+        {
+            List<String> possibleDigits = combos.get(digit);
+            sequences.add(possibleDigits);
+            counter *= possibleDigits.size();
+        }
 
         List<String> solution = new ArrayList<>();
+//        Arrays.fill(solution, "");
 
-        solution.addAll(test("", solution, 0, lettersToUse));
+        int[] counters = new int[numbers.length];
+        Arrays.fill(counters, 0);
+        for (int i = 0; i < counter; i++)
+        {
+            String solutionString = "";
+
+            for (int j = 0; j < counters.length; j++)
+            {
+                solutionString += combos.get(numbers[j]).get(counters[j]);
+
+                counters[j]++;
+            }
+
+            solution.add(solutionString);
+        }
 
         return solution;
     }
-
-    public static List<String> test(String start,List<String> solution, int courser, List<List<String>> letters)
-    {
-        if (courser == letters.size())
-            return Collections.emptyList();
-
-        List<String> thisList = new ArrayList<>();
-
-        List<String> letterList = letters.get(courser);
-        for (String letter : letterList)
-        {
-            test(letter, solution,  courser+1, letters);
-            thisList.add(start + letter);
-        }
-
-        return thisList;
-    }
-
 }
