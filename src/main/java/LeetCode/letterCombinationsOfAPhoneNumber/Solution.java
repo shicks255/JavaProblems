@@ -38,6 +38,7 @@ public class Solution
 //        Arrays.fill(solution, "");
 
         int counterIncrementer = phoneNumbers.length-1;
+        int lastTouched = counterIncrementer;
         int[] counters = new int[phoneNumbers.length];
 
         Arrays.fill(counters, 0);
@@ -48,20 +49,27 @@ public class Solution
             for (int j = 0; j < counters.length; j++)
             {
                 solutionString += combos.get(phoneNumbers[j]).get(counters[j]);
-
-                if (j == counters.length-1)
+                if (counterIncrementer == j)
                     counters[j]++;
+
                 if (combos.get(phoneNumbers[j]).size() == counters[j])
                 {
-                    counters[j] = 0;
-                    if (counterIncrementer > 0)
+                    //the counterIncrementer needs to be flipped, and CI goes up one.  Everything below it goes to 0 as well
+                    if (combos.get(phoneNumbers[lastTouched]).size() <= counters[lastTouched])
                     {
-                        counters[counterIncrementer-1]++;
-                        if (combos.get(phoneNumbers[counterIncrementer]).size() == counters[counterIncrementer - 1])
+                        for (int k = counterIncrementer; k < counters.length; k++)
                         {
-                            counterIncrementer--;
-                            counters[counterIncrementer] = 0;
-                            counters[counterIncrementer-1]++;
+                            counters[k] = 0;
+                            lastTouched--;
+                        }
+                        counters[lastTouched]++;
+                    }
+                    else
+                    {
+                        counters[lastTouched]++;
+                        for (int k = lastTouched+1; k < counters.length; k++)
+                        {
+                            counters[k] = 0;
                         }
                     }
                 }
