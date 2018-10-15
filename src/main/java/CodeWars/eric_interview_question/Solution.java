@@ -1,7 +1,9 @@
 package CodeWars.eric_interview_question;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  Class name must be "Main"
@@ -21,8 +23,8 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(arrayContainsString("disassemble", new char[]{'d', 'n', 'i', 'k', 't', 't', 'a', 'q', 'w', 'o', 'b', 'x', 'x', 'm', 'z', 'q', 'i', 'j', 'k', 'n'}));
-        System.out.println(arrayContainsString("disassemble", new char[]{'d', 'n', 'e', 'k', 't', 's', 'a', 's', 'w', 'o', 'b', 's', 'x', 'm', 'z', 'l', 'e', 'i', 'k', 'b'}));
+        System.out.println(arrayContainsString2("disassemble", new char[]{'d', 'n', 'i', 'k', 't', 't', 'a', 'q', 'w', 'o', 'b', 'x', 'x', 'm', 'z', 'q', 'i', 'j', 'k', 'n'}));
+        System.out.println(arrayContainsString2("disassemble", new char[]{'d', 'n', 'e', 'k', 't', 's', 'a', 's', 'w', 'o', 'b', 's', 'x', 'm', 'z', 'l', 'e', 'i', 'k', 'b'}));
     }
 
     public static boolean arrayContainsString(String testString, char[] testArray)
@@ -36,6 +38,34 @@ public class Solution
                 letters.remove(c);
 
         return letters.size() == 0;
+    }
+
+    public static boolean arrayContainsString2(String testString, char[] testArray)
+    {
+        Map<Character, Integer> occurenceMap = new HashMap<>();
+
+        for (Character ch : testString.toCharArray())
+        {
+            Integer occurence = occurenceMap.get(ch);
+            if (occurence == null)
+                occurence = 0;
+            occurence++;
+            occurenceMap.put(ch, occurence);
+        }
+
+        for (Character ch : testArray)
+        {
+            Integer occurence = occurenceMap.get(ch);
+            if (occurence != null && occurence > 0)
+            {
+                occurence--;
+                occurenceMap.put(ch, occurence);
+            }
+        }
+
+        int test = occurenceMap.values().stream().reduce((x,y) -> x + y).orElse(1);
+
+        return test == 0;
     }
 
 }
