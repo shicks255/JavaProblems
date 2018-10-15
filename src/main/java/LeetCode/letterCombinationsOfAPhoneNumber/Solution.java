@@ -40,7 +40,6 @@ public class Solution
         int[] counters = new int[phoneNumbers.length];
         Arrays.fill(counters, 0);
 
-        int lastTouched = counters.length-2;
         for (int i = 0; i < counter; i++) //iterate over the amount of spaces were going to need
         {
             String solutionString = "";
@@ -51,20 +50,16 @@ public class Solution
                 if (j == counters.length-1) // last counter
                 {
                     counters[j]++;
-                    if (combos.get(phoneNumbers[j]).size() <= counters[j]) //
+                    if (combos.get(phoneNumbers[j]).size() <= counters[j]) //means the last item has reached it's max
                     {
-                        counters[lastTouched]++;
                         counters[j] = 0;
-                        if (combos.get(phoneNumbers[lastTouched]).size() <= counters[lastTouched])
+                        int k = counters.length-2;
+                        while (counters[k] == combos.get(phoneNumbers[k]).size()-1 && k>0)
                         {
-                            if (lastTouched > 0)
-                            {
-                                counters[lastTouched-1]++;
-                                for (int k = lastTouched; k < counters.length; k++)
-                                    counters[k] = 0;
-                                lastTouched = counters.length-2;
-                            }
+                            counters[k] = 0;
+                            k--;
                         }
+                        counters[k]++;
                     }
                 }
             }
