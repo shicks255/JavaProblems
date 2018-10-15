@@ -1,5 +1,8 @@
 package CodeWars.eric_interview_question;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  Class name must be "Main"
 
@@ -16,20 +19,23 @@ package CodeWars.eric_interview_question;
 
 public class Solution
 {
-
     public static void main(String[] args)
     {
-
+        System.out.println(arrayContainsString("disassemble", new char[]{'d', 'n', 'i', 'k', 't', 't', 'a', 'q', 'w', 'o', 'b', 'x', 'x', 'm', 'z', 'q', 'i', 'j', 'k', 'n'}));
+        System.out.println(arrayContainsString("disassemble", new char[]{'d', 'n', 'e', 'k', 't', 's', 'a', 's', 'w', 'o', 'b', 's', 'x', 'm', 'z', 'l', 'e', 'i', 'k', 'b'}));
     }
-
 
     public static boolean arrayContainsString(String testString, char[] testArray)
     {
-        boolean passesTest = false;
+        List<Character> letters = new ArrayList<>();
+        for (Character c : testString.toCharArray())
+            letters.add(c);
 
+        for (Character c : testArray)
+            if (letters.contains(c))
+                letters.remove(c);
 
-
-        return passesTest;
+        return letters.size() == 0;
     }
 
 }
