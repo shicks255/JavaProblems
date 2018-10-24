@@ -21,7 +21,7 @@
 
 package CodeWars.catalog;
 
-public class Solution
+public class Catalog
 {
 
     static String s =
@@ -66,10 +66,12 @@ public class Solution
 
         String[] entries = s.split("\n\n");
 
+        boolean foundAMatch = false;
         for (String entry : entries)
         {
             if (entry.contains(article))
             {
+                foundAMatch = true;
                 String name = entry.substring(entry.indexOf("<name>") + 6, entry.indexOf("</name"));
                 if (name.contains(article))
                 {
@@ -82,6 +84,9 @@ public class Solution
                 }
             }
         }
+
+        if (!foundAMatch)
+            answer.append("Nothing");
 
         return answer.toString();
     }
