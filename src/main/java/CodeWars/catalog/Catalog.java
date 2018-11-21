@@ -21,7 +21,7 @@
 
 package CodeWars.catalog;
 
-public class Solution
+public class Catalog
 {
 
     static String s =
@@ -54,30 +54,40 @@ public class Solution
 
     public static void main(String[] args)
     {
-//        catalog(s, "prod");
-//        catalog(s, "saw");
-//        catalog(s, "ladder");
-//        catalog(s, "fan");
+        System.out.println(catalog(s, "prod"));
+        System.out.println("\r\n\r\n" + catalog(s, "saw"));
+        System.out.println("\r\n\r\n" + catalog(s, "ladder"));
+        System.out.println("\r\n\r\n" + catalog(s, "fan"));
     }
 
     public static String catalog(String s, String article)
     {
-        String answer = "";
+        StringBuilder answer = new StringBuilder();
 
         String[] entries = s.split("\n\n");
 
+        boolean foundAMatch = false;
         for (String entry : entries)
         {
             if (entry.contains(article))
             {
+                foundAMatch = true;
+                String name = entry.substring(entry.indexOf("<name>") + 6, entry.indexOf("</name"));
+                if (name.contains(article))
+                {
+                    String price = entry.substring(entry.indexOf("<prx>") + 5, entry.indexOf("</prx"));
+                    String quantity = entry.substring(entry.indexOf("<qty>") + 5, entry.indexOf("</qty"));
 
-
+                    if (answer.length() > 0)
+                        answer.append("\n");
+                    answer.append(name).append(" > ").append("prx: $").append(price).append(" qty: ").append(quantity);
+                }
             }
         }
 
+        if (!foundAMatch)
+            answer.append("Nothing");
 
-        return "";
+        return answer.toString();
     }
-
-
 }
