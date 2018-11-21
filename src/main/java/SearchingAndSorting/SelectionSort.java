@@ -1,12 +1,13 @@
 package SearchingAndSorting;
 
-import java.util.Arrays;
-
 public class SelectionSort
 {
     public static void main(String[] args)
     {
+        int[] array = new int[]{5,2,4,1};
+
         SelectionSort selectionSort = new SelectionSort();
+        selectionSort.sort(array);
     }
 
     public int[] sort(int[] array)
