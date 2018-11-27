@@ -18,6 +18,8 @@ public class Driver
         linkedList.removeDuplicatesNoBuffer();
 //        linkedList.removeDuplicates();
 
+        System.out.println(linkedList.findKthElementFromEnd(3));
+
         System.out.println(linkedList);
     }
 }

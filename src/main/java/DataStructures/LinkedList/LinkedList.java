@@ -187,4 +187,37 @@ public class LinkedList<T>
         System.out.println(System.currentTimeMillis() - milliesStart);
     }
 
+    /**
+     * This would be easily done if we were keeping track of the size of the list.  For our purposes we aren't going to do that
+     * @param k
+     * @return
+     */
+    public Node findKthElementFromEnd(int k)
+    {
+        int count = 0;
+
+        Node root = this.root;
+        while (root != null)
+        {
+            count++;
+            root = root.next;
+        }
+
+        if (k <= count)
+        {
+            int stopAt = count - k;
+            count = 0;
+            root = this.root;
+            while (root != null)
+            {
+                count++;
+                if (count == stopAt)
+                    return root;
+                root = root.next;
+            }
+        }
+
+        return null;
+    }
+
 }
