@@ -13,6 +13,20 @@ public class LinkedList<T>
         this.root = root;
     }
 
+    @Override
+    public String toString()
+    {
+        String stringVersion = "List Front --> Back: ";
+
+        Node root = this.root;
+        while (root != null)
+        {
+            stringVersion += root.data;
+            root = root.next;
+        }
+        return stringVersion;
+    }
+
     public void addToEnd(T value)
     {
         Node newNode = new Node(value);
@@ -128,6 +142,7 @@ public class LinkedList<T>
 
     public void removeDuplicates()
     {
+        long millisStart = System.currentTimeMillis();
         Set<T> set = new HashSet<>();
 
         Node root = this.root;
@@ -144,6 +159,32 @@ public class LinkedList<T>
                 root = root.next;
             }
         }
+
+        System.out.println(System.currentTimeMillis() - millisStart);
+    }
+
+    public void removeDuplicatesNoBuffer()
+    {
+        long milliesStart = System.currentTimeMillis();
+        Node root = this.root;
+        if (root != null)
+        {
+            while (root != null)
+            {
+                Node temp = root.next;
+                while (temp != null)
+                {
+                    if (temp.data.equals(root.data))
+                        this.remove((T) root.data);
+                    temp = temp.next;
+                }
+
+                root = root.next;
+            }
+
+        }
+
+        System.out.println(System.currentTimeMillis() - milliesStart);
     }
 
 }

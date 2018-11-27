@@ -7,17 +7,16 @@ public class Driver
     {
         LinkedList<Integer> linkedList = new LinkedList(1);
 
-        linkedList.removeDuplicates();
-
         linkedList.addToEnd(2);
-        linkedList.removeDuplicates();
         linkedList.addToEnd(3);
         linkedList.addToEnd(4);
 
         linkedList.addToFront(0);
         linkedList.addToFront(4);
+        linkedList.addToEnd(0);
 
-        linkedList.removeDuplicates();
+        linkedList.removeDuplicatesNoBuffer();
+//        linkedList.removeDuplicates();
 
         System.out.println(linkedList);
     }
