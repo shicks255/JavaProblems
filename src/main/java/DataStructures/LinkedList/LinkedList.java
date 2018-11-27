@@ -1,5 +1,8 @@
 package DataStructures.LinkedList;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class LinkedList<T>
 {
     public Node<T> root;
@@ -98,7 +101,11 @@ public class LinkedList<T>
         if (this.root != null)
         {
             if (this.root.data == value)
-                this.root = null;
+            {
+                Node temp = this.root.next;
+                this.root = temp;
+                return;
+            }
 
             Node temp = this.root;
 
@@ -115,6 +122,26 @@ public class LinkedList<T>
                 }
 
                 temp = temp.next;
+            }
+        }
+    }
+
+    public void removeDuplicates()
+    {
+        Set<T> set = new HashSet<>();
+
+        Node root = this.root;
+        if (root != null)
+        {
+            set.add((T)root.data);
+            while (root != null)
+            {
+                Node temp = root.next;
+                if (temp != null)
+                    if (!set.add((T) temp.data))
+                        this.remove((T) temp.data);
+
+                root = root.next;
             }
         }
     }
