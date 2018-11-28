@@ -7,19 +7,20 @@ public class Driver
     {
         LinkedList<Integer> linkedList = new LinkedList(1);
 
-        linkedList.addToEnd(2);
-        linkedList.addToEnd(3);
-        linkedList.addToEnd(4);
-
-        linkedList.addToFront(0);
+        linkedList.addToFront(2);
+        linkedList.addToFront(3);
+        linkedList.addToFront(5);
         linkedList.addToFront(4);
-        linkedList.addToEnd(0);
+        linkedList.addToFront(9);
+        linkedList.addToFront(9);
 
-        linkedList.removeDuplicatesNoBuffer();
+//        linkedList.removeDuplicatesNoBuffer();
 //        linkedList.removeDuplicates();
 
-        System.out.println(linkedList.findKthElementFromEnd(3));
+//        System.out.println(linkedList.findKthElementFromEnd(3));
 
+        System.out.println(linkedList);
+        linkedList.partition(6);
         System.out.println(linkedList);
     }
 }

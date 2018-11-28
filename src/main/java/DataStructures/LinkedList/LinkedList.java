@@ -220,4 +220,32 @@ public class LinkedList<T>
         return null;
     }
 
+    public void partition(T valueToPartitionAround)
+    {
+        Node root = this.root;
+
+        while (root != null)
+        {
+            if ((Integer)root.data > (Integer)valueToPartitionAround)
+            {
+                Node swapper = root.next;
+                while (swapper != null && (Integer)swapper.data > (Integer)valueToPartitionAround)
+                    swapper = swapper.next;
+
+                Node temp = root;
+                this.remove((T)root.data);
+                this.addToFront((T)temp.data);
+
+                if ((Integer)swapper.data < (Integer)valueToPartitionAround)
+                {
+                    Node temp2 = swapper;
+                    this.remove((T)swapper.data);
+                    this.addToEnd((T)temp2.data);
+                }
+
+            }
+            root = root.next;
+        }
+    }
+
 }
