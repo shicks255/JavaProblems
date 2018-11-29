@@ -35,11 +35,22 @@ public class Driver
 //        linkedList.partition(6);
 //        System.out.println(linkedList);
 
-        LinkedList<Integer> palindromCheck = new LinkedList<>(1);
-        palindromCheck.addToEnd(2);
-        palindromCheck.addToEnd(1);
-        palindromCheck.addToEnd(2);
-        palindromCheck.addToEnd(1);
-        System.out.println(palindromCheck.isPalindrome());
+//        LinkedList<Integer> palindromCheck = new LinkedList<>(1);
+//        palindromCheck.addToEnd(2);
+//        palindromCheck.addToEnd(1);
+//        palindromCheck.addToEnd(2);
+//        palindromCheck.addToEnd(1);
+//        System.out.println(palindromCheck.isPalindrome());
+
+        LinkedList<Integer> runnerCheck = new LinkedList<>(1);
+        runnerCheck.addToEnd(2);
+        runnerCheck.addToEnd(3);
+        runnerCheck.addToEnd(4);
+//        runnerCheck.addToEnd(5);
+//        runnerCheck.addToEnd(6);
+//        runnerCheck.addToEnd(7);
+
+        Node middle = runnerCheck.findNodeInMiddle();
+        System.out.println(middle);
     }
 }

@@ -298,4 +298,21 @@ public class LinkedList<T>
         return reverse.equals(items.toString());
     }
 
+    public  Node findNodeInMiddle()
+    {
+        Node root = this.root;
+        Node runner = root.next;
+
+        while (root != null && runner != null)
+        {
+            if (runner.next != null && runner.next.next != null)
+                runner = runner.next.next;
+            else
+                return root;
+            root = root.next;
+        }
+
+        return root;
+    }
+
 }
