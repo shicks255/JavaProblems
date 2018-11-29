@@ -247,6 +247,12 @@ public class LinkedList<T>
         }
     }
 
+    /**
+     * Sum 2 linkedList that represents digits in a number, backwards
+     * @param a
+     * @param b
+     * @return
+     */
     public static LinkedList sum2Lists(LinkedList a, LinkedList b)
     {
         String aSum = recursiveSum(a.root);
@@ -273,6 +279,23 @@ public class LinkedList<T>
             sum += recursiveSum(node.next);
 
         return "" + sum + node.data;
+    }
+
+    public boolean isPalindrome()
+    {
+        StringBuilder items = new StringBuilder("");
+
+        Node root = this.root;
+        while (root != null)
+        {
+            items.append(root.data);
+            root = root.next;
+        }
+
+        String reverse = items.reverse().toString();
+        items.reverse();//reverse itself back
+
+        return reverse.equals(items.toString());
     }
 
 }
