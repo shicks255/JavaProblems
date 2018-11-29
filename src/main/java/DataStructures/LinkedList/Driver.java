@@ -14,13 +14,25 @@ public class Driver
         linkedList.addToFront(9);
         linkedList.addToFront(9);
 
+        LinkedList<Integer> a = new LinkedList<>(7);
+        a.addToEnd(1);
+        a.addToEnd(6);
+
+        LinkedList<Integer> b = new LinkedList<>(5);
+        b.addToEnd(9);
+        b.addToEnd(2);
+
+        LinkedList<Integer> sum = LinkedList.sum2Lists(a,b);
+
+        System.out.println(sum);
+
 //        linkedList.removeDuplicatesNoBuffer();
 //        linkedList.removeDuplicates();
 
 //        System.out.println(linkedList.findKthElementFromEnd(3));
 
-        System.out.println(linkedList);
-        linkedList.partition(6);
-        System.out.println(linkedList);
+//        System.out.println(linkedList);
+//        linkedList.partition(6);
+//        System.out.println(linkedList);
     }
 }

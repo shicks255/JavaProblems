@@ -223,7 +223,6 @@ public class LinkedList<T>
     public void partition(T valueToPartitionAround)
     {
         Node root = this.root;
-
         while (root != null)
         {
             if ((Integer)root.data > (Integer)valueToPartitionAround)
@@ -246,6 +245,34 @@ public class LinkedList<T>
             }
             root = root.next;
         }
+    }
+
+    public static LinkedList sum2Lists(LinkedList a, LinkedList b)
+    {
+        String aSum = recursiveSum(a.root);
+        String bSum = recursiveSum(b.root);
+
+        int sum = Integer.valueOf(aSum) + Integer.valueOf(bSum);
+        String digitString = Integer.toString(sum);
+
+        LinkedList<Integer> answer = null;
+        for (int i = digitString.length()-1; i >= 0; i--)
+        {
+            if (answer == null)
+                answer = new LinkedList<>(Integer.valueOf("" + digitString.charAt(i)));
+            else
+                answer.addToFront(Integer.valueOf("" + digitString.charAt(i)));
+        }
+        return answer;
+    }
+
+    private static String recursiveSum(Node node)
+    {
+        String sum = "";
+        if (node.next != null)
+            sum += recursiveSum(node.next);
+
+        return "" + sum + node.data;
     }
 
 }
