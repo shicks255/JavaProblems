@@ -281,6 +281,16 @@ public class LinkedList<T>
         return "" + sum + node.data;
     }
 
+    private void mergeSort()
+    {
+        Node root = this.root;
+
+        while (root != null)
+        {
+
+        }
+    }
+
     public boolean isPalindrome()
     {
         StringBuilder items = new StringBuilder("");
@@ -315,8 +325,23 @@ public class LinkedList<T>
         return root;
     }
 
+//    Doing a brute force, N*M run time
     public Node findIntersection(LinkedList<Integer> test)
     {
+        Node root1 = this.root;
+        while (root1 != null)
+        {
+            Node root2 = test.root;
+            while (root2 != null)
+            {
+                if (root1.data == root2.data)
+                    return root1;
+
+                root2 = root2.next;
+            }
+
+            root1 = root1.next;
+        }
 
         return null;
     }

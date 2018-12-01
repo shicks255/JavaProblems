@@ -1,5 +1,7 @@
 package DataStructures.LinkedList;
 
+import javax.naming.LinkLoopException;
+
 public class Driver
 {
 
@@ -42,15 +44,28 @@ public class Driver
 //        palindromCheck.addToEnd(1);
 //        System.out.println(palindromCheck.isPalindrome());
 
-        LinkedList<Integer> runnerCheck = new LinkedList<>(1);
-        runnerCheck.addToEnd(2);
-        runnerCheck.addToEnd(3);
-        runnerCheck.addToEnd(4);
+//        LinkedList<Integer> runnerCheck = new LinkedList<>(1);
+//        runnerCheck.addToEnd(2);
+//        runnerCheck.addToEnd(3);
+//        runnerCheck.addToEnd(4);
 //        runnerCheck.addToEnd(5);
 //        runnerCheck.addToEnd(6);
 //        runnerCheck.addToEnd(7);
 
-        Node middle = runnerCheck.findNodeInMiddle();
-        System.out.println(middle);
+//        Node middle = runnerCheck.findNodeInMiddle();
+//        System.out.println(middle);
+
+        LinkedList<Integer> list1 = new LinkedList<>(1);
+        list1.addToEnd(2);
+        list1.addToEnd(3);
+        list1.addToEnd(4);
+
+        LinkedList<Integer> list2 = new LinkedList<>(9);
+        list2.addToEnd(8);
+        list2.addToEnd(7);
+        list2.addToEnd(4);
+
+        Node interesect = list1.findIntersection(list2);
+        System.out.println(interesect);
     }
 }
