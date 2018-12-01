@@ -298,7 +298,7 @@ public class LinkedList<T>
         return reverse.equals(items.toString());
     }
 
-    public  Node findNodeInMiddle()
+    public Node findNodeInMiddle()
     {
         Node root = this.root;
         Node runner = root.next;
@@ -313,6 +313,12 @@ public class LinkedList<T>
         }
 
         return root;
+    }
+
+    public Node findIntersection(LinkedList<Integer> test)
+    {
+
+        return null;
     }
 
 }
