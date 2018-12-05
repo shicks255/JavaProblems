@@ -65,7 +65,9 @@ public class Driver
         list2.addToEnd(7);
         list2.addToEnd(4);
 
-        Node interesect = list1.findIntersection(list2);
-        System.out.println(interesect);
+        list2.mergeSort(list2.root);
+
+//        Node interesect = list1.findIntersection(list2);
+//        System.out.println(interesect);
     }
 }

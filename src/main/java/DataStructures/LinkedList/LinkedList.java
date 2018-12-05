@@ -281,15 +281,50 @@ public class LinkedList<T>
         return "" + sum + node.data;
     }
 
-    private void mergeSort()
+    public Node mergeSort(Node node)
     {
-        Node root = this.root;
+        Node root;
+        if (node == null)
+            root = this.root;
+        root = node;
 
-        while (root != null)
-        {
+        if (root == null || root.next == null)
+            return root;
 
-        }
+        Node middle = getMiddle(root);
+        Node nextMiddle = middle.next;
+
+        middle.next = null;
+
+        Node left = mergeSort(root);
+        Node right = mergeSort(nextMiddle);
+
+        Node sortedList = sortedMerge(left, right);
+        return sortedList;
     }
+
+    public Node sortedMerge(Node left, Node right)
+    {
+        Node result;
+        if (left == null)
+            return right;
+        if (right == null)
+            return left;
+
+        if ((Integer)left.data <= (Integer)right.data)
+        {
+            result = left;
+            result.next = sortedMerge(left.next, right);
+        }
+        else
+        {
+            result = right;
+            result.next = sortedMerge(left, right.next);
+        }
+
+        return result;
+    }
+
 
     public boolean isPalindrome()
     {
@@ -313,35 +348,47 @@ public class LinkedList<T>
         Node root = this.root;
         Node runner = root.next;
 
-        while (root != null && runner != null)
+        while (runner != null)
         {
-            if (runner.next != null && runner.next.next != null)
-                runner = runner.next.next;
-            else
-                return root;
-            root = root.next;
+            runner = runner.next;
+            if (runner != null)
+            {
+                root = root.next;
+                runner = runner.next;
+            }
         }
 
         return root;
     }
 
+    public Node getMiddle(Node node)
+    {
+        Node root;
+        if (node == null)
+            root = this.root;
+
+        root = node;
+
+        Node fast = root.next;
+        Node slow = root;
+
+        while (fast != null)
+        {
+            fast = fast.next;
+            if (fast != null)
+            {
+                slow = slow.next;
+                fast = fast.next;
+            }
+        }
+
+        return slow;
+    }
+
 //    Doing a brute force, N*M run time
     public Node findIntersection(LinkedList<Integer> test)
     {
-        Node root1 = this.root;
-        while (root1 != null)
-        {
-            Node root2 = test.root;
-            while (root2 != null)
-            {
-                if (root1.data == root2.data)
-                    return root1;
-
-                root2 = root2.next;
-            }
-
-            root1 = root1.next;
-        }
+        mergeSort(test.root);
 
         return null;
     }
