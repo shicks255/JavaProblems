@@ -285,7 +285,7 @@ public class LinkedList<T>
     {
         Node root;
         if (node == null)
-            root = this.root;
+            node = this.root;
         root = node;
 
         if (root == null || root.next == null)
