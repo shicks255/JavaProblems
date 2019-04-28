@@ -26,8 +26,7 @@ public class Driver
         stack.pop();
         System.out.println(stack.toString());
 
-
+        stack.pop();
     }
-
 
 }
