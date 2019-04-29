@@ -8,8 +8,12 @@ public class Driver
 
         t.addWord("eat");
         t.addWord("eaten");
+        t.addWord("eatened");
         t.addWord("beaten");
+        t.addWord("beater");
+        t.addWord("spanish");
+        t.addWord("spaniard");
 
-        System.out.println(t);
+        System.out.println(t.toString(t.root, 0));
     }
 }
