@@ -2,7 +2,6 @@ package DataStructures.Trie;
 
 import java.util.Map;
 import java.util.Set;
-import java.util.stream.IntStream;
 
 public class Trie
 {
@@ -13,7 +12,7 @@ public class Trie
         root = new Node("");
     }
 
-    public String toString(Node node, int tabs)
+    public String toString(Node node, String soFar)
     {
         if (node == null)
             return "";
@@ -22,21 +21,16 @@ public class Trie
 
         info.append(node.letter);
         if (node.isFullWord)
-        {
-            tabs += 1;
             info.append("\r\n");
-            for (int i = 0; i < tabs; i++)
-                info.append("\t");
-        }
 
         Set<String> children = node.children.keySet();
+        soFar += node.letter;
         for (String child : children)
         {
-            if (node == root)
-                tabs = 0;
             Node c = node.children.get(child);
-            info.append(toString(c, tabs));
+            info.append(soFar + toString(c, soFar));
         }
+        soFar = "";
 
         return info.toString();
     }

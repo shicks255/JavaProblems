@@ -14,6 +14,6 @@ public class Driver
         t.addWord("spanish");
         t.addWord("spaniard");
 
-        System.out.println(t.toString(t.root, 0));
+        System.out.println(t.toString(t.root, ""));
     }
 }
