@@ -1,5 +1,7 @@
 package DataStructures.Trie;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -72,6 +74,24 @@ public class Trie
         }
 
         return temp.isFullWord;
+    }
+
+    public List<String> returnAllPrefixes(String word)
+    {
+        List<String> prefixes = new ArrayList<>();
+
+        Node temp = root;
+        String[] letters = word.split("");
+        for (int i = 0; i < letters.length-1; i++)
+        {
+            if (temp.children.get(letters[i]) == null)
+                break;
+            temp = temp.children.get(letters[i]);
+            if (temp.isFullWord)
+                prefixes.add(word.substring(0,i+1));
+        }
+
+        return prefixes;
     }
 
 }
