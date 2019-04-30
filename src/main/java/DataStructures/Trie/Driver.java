@@ -6,14 +6,16 @@ public class Driver
     {
         Trie t = new Trie();
 
-        t.addWord("eat");
-        t.addWord("eaten");
-        t.addWord("eatened");
-        t.addWord("beaten");
-        t.addWord("beater");
-        t.addWord("spanish");
-        t.addWord("spaniard");
+        t.addWord("bat");
+        t.addWord("bats");
+        t.addWord("an");
+        t.addWord("and");
+        t.addWord("andy");
+        t.addWord("anthony");
+        System.out.println(t.toString());
 
-        System.out.println(t.toString(t.root, ""));
+        System.out.println(t.contains("bat"));
+        System.out.println(t.contains("bats"));
+        System.out.println(t.contains("batss"));
     }
 }
