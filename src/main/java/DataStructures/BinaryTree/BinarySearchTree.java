@@ -34,36 +34,53 @@ public class BinarySearchTree<T extends Comparable>
 
     public void add(T data)
     {
-        Node<T> newNode = new Node<>(data);
+        if (root == null)
+            root = new Node<>(data);
+        else
+            insert(root, data);
+    }
 
-        Node temp = root;
-        if (temp == null)
-            root = newNode;
+    private void insert(Node node, T value)
+    {
+        if (value.compareTo(node.data) < 0)
+        {
+            if (node.left == null)
+                node.left = new Node(value);
+            else
+                insert(node.left,value);
+        }
         else
         {
-            while (temp != null)
-            {
-                if (data.compareTo(temp.data) <= 0)
-                {
-                    if (temp.left == null)
-                    {
-                        temp.left = newNode;
-                        break;
-                    }
-                    else
-                        temp = temp.left;
-                }
-                else
-                {
-                    if (temp.right == null)
-                    {
-                        temp.right = newNode;
-                        break;
-                    }
-                    else
-                        temp = temp.right;
-                }
-            }
+            if (node.right == null)
+                node.right = new Node(value);
+            else
+                insert(node.right, value);
         }
     }
+
+//    public boolean contains(T value)
+//    {
+//
+//    }
+//
+//    public Node get(T Value)
+//    {
+//
+//    }
+//
+//    public T min()
+//    {
+//
+//    }
+//
+//    public T max()
+//    {
+//
+//    }
+//
+//    public int height()
+//    {
+//
+//    }
+
 }
