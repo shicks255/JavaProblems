@@ -65,9 +65,77 @@ public class BinarySearchTree<T extends Comparable>
 //
 //    public Node get(T Value)
 //    {
+//        Node temp = root;
+//
 //
 //    }
-//
+
+//    public Node getLeftMostChild(Node node)
+//    {
+//        Node left = null;
+//        Node right = null;
+//        if (node.left != null)
+//            if (node.left.data.compareTo())
+//    }
+
+    public Node remove(T value)
+    {
+        Node temp = root;
+        Node tempParent = null;
+        while (temp != null)
+        {
+            if (temp.data.equals(value))
+            {
+                //temp to remove is a leaf
+                if (temp.right == null && temp.left == null)
+                {
+                    if (temp.data.compareTo(tempParent.data) > 0)
+                        tempParent.right = null;
+                    else
+                        tempParent.left = null;
+                }
+
+                //temp to remove has 2 leafs
+                if (temp.left != null && temp.right != null)
+                {
+                    Node temp2 = temp;
+                    return temp;
+                }
+                else //temp to remove has 1 leaf
+                {
+                    if (temp.left != null)
+                    {
+                        if (temp.data.compareTo(tempParent.data) > 0)
+                            tempParent.right = temp.left;
+                        else
+                            tempParent.left = temp.left;
+                    }
+                    if (temp.right != null)
+                    {
+                        if (temp.data.compareTo(tempParent.data) < 0)
+                            tempParent.left = temp.right;
+                        else
+                            tempParent.right = temp.right;
+                    }
+                }
+
+                return temp;
+            }
+            else if(value.compareTo(temp.data) < 0)
+            {
+                tempParent = temp;
+                temp = temp.left;
+            }
+            else
+            {
+                tempParent = temp;
+                temp = temp.right;
+            }
+        }
+
+        return null;
+    }
+
 //    public T min()
 //    {
 //
