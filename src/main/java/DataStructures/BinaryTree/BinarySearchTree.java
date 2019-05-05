@@ -98,7 +98,37 @@ public class BinarySearchTree<T extends Comparable>
                 //temp to remove has 2 leafs
                 if (temp.left != null && temp.right != null)
                 {
-                    Node temp2 = temp;
+                    //we are in the right subtree
+                    if (temp.data.compareTo(root.data) >= 0)
+                    {
+                        //find smallest value
+                        Node temp2Parent = temp;
+                        Node temp2 = temp.left;
+                        while (temp2.left != null)
+                        {
+                            temp2Parent = temp2;
+                            temp2 = temp2.left;
+                        }
+
+                        temp.data = temp2.data;
+                        temp2Parent.left = null;
+                    }
+
+                    //we are in the left subtree
+                    if (temp.data.compareTo(root.data) < 0)
+                    {
+                        Node temp2Parent = temp.right;
+                        Node temp2 = temp.right;
+                        while (temp2.right != null)
+                        {
+                            temp2Parent = temp2;
+                            temp2 = temp2.right;
+                        }
+
+                        temp.data = temp2.data;
+                        temp2Parent.right = null;
+                    }
+
                     return temp;
                 }
                 else //temp to remove has 1 leaf

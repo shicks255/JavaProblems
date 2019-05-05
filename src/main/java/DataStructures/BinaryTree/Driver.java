@@ -12,9 +12,13 @@ public class Driver
         tree.add(6);
         tree.add(11);
         tree.add(1);
+        tree.add(10);
+        tree.add(12);
+        tree.add(15);
+        tree.add(13);
 
-//        tree.remove(3);
-        tree.remove(1);
+        tree.remove(11);
+//        tree.remove(1);
 
         System.out.println(tree.toString());
     }
