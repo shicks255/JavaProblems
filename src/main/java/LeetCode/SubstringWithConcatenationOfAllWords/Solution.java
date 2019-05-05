@@ -10,13 +10,37 @@ public class Solution
 
     public static void main(String[] args)
     {
-        System.out.println(findSubstring("abcdefghi", new String[]{"abc", "def"}));
-        System.out.println(findSubstring("barfoothefoobarman", new String[]{"foo", "bar"}));
-        System.out.println(findSubstring("wordgoodgoodgoodbestword", new String[]{"word", "good", "best", "word"}));
-        System.out.println(findSubstring("steve", new String[]{}));
-        System.out.println(findSubstring("lingmindraboofooowingdingbarrwingmonkeypoundcake",
-                new String[]{"fooo","barr","wing","ding","wing"}));
-        System.out.println(findSubstring("abcdefghi", new String[]{"def", "ghi"}));
+        System.out.println(findSubstring2("abcdefghi", new String[]{"abc", "def"}));
+//        System.out.println(findSubstring("barfoothefoobarman", new String[]{"foo", "bar"}));
+//        System.out.println(findSubstring("wordgoodgoodgoodbestword", new String[]{"word", "good", "best", "word"}));
+//        System.out.println(findSubstring("steve", new String[]{}));
+//        System.out.println(findSubstring("lingmindraboofooowingdingbarrwingmonkeypoundcake",
+//                new String[]{"fooo","barr","wing","ding","wing"}));
+//        System.out.println(findSubstring("abcdefghi", new String[]{"def", "ghi"}));
+    }
+
+    public static List<Integer> findSubstring2(String s, String[] words)
+    {
+        List<Integer> answer = new ArrayList<>();
+        String word = String.join("", words);
+        Integer valueToFind = Arrays.stream(word.split("")).map(x -> x.hashCode()).reduce(0, (x,y) -> x+y);
+
+        int wordLength = words[0].length();
+        int amountOfWords = words.length;
+        int stride = wordLength*amountOfWords;
+
+        for (int i = 0; i < s.length()-1 - wordLength; i++)
+        {
+            String sub = s.substring(i, stride);
+            Integer valueFound = Arrays.stream(sub.split("")).map(x -> x.hashCode()).reduce(0, (x,y) -> x+y);
+
+            if (valueFound.equals(valueToFind))
+            {
+                System.out.println("possible match at index " + i);
+            }
+        }
+
+        return answer;
     }
 
     public static List<Integer> findSubstring(String s, String[] words)
