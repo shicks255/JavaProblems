@@ -20,6 +20,8 @@ public class Driver
         tree.remove(11);
 //        tree.remove(1);
 
+
+        System.out.println(tree.contains(4));
         System.out.println(tree.toString());
     }
 }

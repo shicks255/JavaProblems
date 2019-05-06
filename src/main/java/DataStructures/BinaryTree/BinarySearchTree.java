@@ -58,25 +58,39 @@ public class BinarySearchTree<T extends Comparable>
         }
     }
 
-//    public boolean contains(T value)
-//    {
-//
-//    }
-//
-//    public Node get(T Value)
-//    {
-//        Node temp = root;
-//
-//
-//    }
+    public boolean contains(T value)
+    {
+        Node temp = root;
+        while (temp != null)
+        {
+            if (temp.data.equals(value))
+                return true;
 
-//    public Node getLeftMostChild(Node node)
-//    {
-//        Node left = null;
-//        Node right = null;
-//        if (node.left != null)
-//            if (node.left.data.compareTo())
-//    }
+            if (value.compareTo(temp.data) >= 0)
+                temp = temp.right;
+            else
+                temp = temp.left;
+        }
+
+        return false;
+    }
+
+    public Node get(T value)
+    {
+        Node temp = root;
+        while (temp != null)
+        {
+            if (temp.data.equals(value))
+                return temp;
+
+            if (value.compareTo(temp.data) >= 0)
+                temp = temp.right;
+            else
+                temp = temp.left;
+        }
+
+        return null;
+    }
 
     public Node remove(T value)
     {
@@ -166,16 +180,34 @@ public class BinarySearchTree<T extends Comparable>
         return null;
     }
 
-//    public T min()
-//    {
-//
-//    }
-//
-//    public T max()
-//    {
-//
-//    }
-//
+    public Node min()
+    {
+        return min(root);
+    }
+
+    public static Node min(Node root)
+    {
+        Node temp = root;
+        while (temp.left != null)
+            temp = temp.left;
+
+        return temp;
+    }
+
+    public Node max()
+    {
+        return max(root);
+    }
+
+    public static Node max(Node root)
+    {
+        Node temp = root;
+        while (temp.right != null)
+            temp = temp.right;
+
+        return temp;
+    }
+
 //    public int height()
 //    {
 //
