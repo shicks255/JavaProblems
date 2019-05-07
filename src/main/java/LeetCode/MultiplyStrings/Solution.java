@@ -1,6 +1,7 @@
 package LeetCode.MultiplyStrings;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solution
@@ -8,13 +9,22 @@ public class Solution
     public static void main(String[] args)
     {
         System.out.println(multiply("22", "155"));
+        System.out.println(multiply("4", "5"));
+        System.out.println(multiply("4", "10"));
+        System.out.println(multiply("123", "456")); //56088
+        System.out.println(multiply("123", "0"));
+        System.out.println(multiply("123456789", "987654321"));
+        System.out.println(multiply("103", "98")); // 10094
     }
 
-    //11
-    //51
     public static String multiply(String num1, String num2)
     {
-        String answer = "";
+        if (num1 == null || num1.length() == 0 || num2 == null || num2.length() == 0)
+            return "";
+        if ( num1.equals("0") || num2.equals("0"))
+            return "0";
+
+        StringBuilder answer = new StringBuilder();
         num1 = new StringBuilder(num1).reverse().toString();
         num2 = new StringBuilder(num2).reverse().toString();
 
@@ -37,6 +47,7 @@ public class Solution
                 else
                     product = "" + (a1*a2);
 
+                //if the product is more than 1 digit, split it up and add to remainder
                 if (product.length()>1)
                 {
                     String[] x = product.split("");
@@ -46,9 +57,11 @@ public class Solution
                 else
                     remainder = "";
 
-                if (j == num2.length()-1 && product.length()>1)
+                //if we are on the last iteration, add the whole thing
+                if (j == num2.length()-1 && remainder.length()>0)
                 {
-                    String[] x = product.split("");
+                    item.add(product);
+                    String[] x = remainder.split("");
                     for (String y : x)
                         item.add(y);
                 }
@@ -60,12 +73,43 @@ public class Solution
         }
 
         int digitGetter = 0;
-        for (List<String> line : graph)
+        String remainder = "";
+        while (true)
         {
+            String digits = "";
+            for (List<String> line : graph)
+            {
+                if (line.size() > digitGetter)
+                {
+                    String digit = line.get(digitGetter);
+                    digits += digit;
+                }
+            }
+            digitGetter++;
 
+            if (digits.length() == 0)
+                break;
+
+            Integer d = Arrays.stream(digits.split("")).map(x -> Integer.parseInt(x)).reduce(0, (x,y) -> x+y);
+            if (remainder.length() > 0)
+            {
+                d += Integer.parseInt(remainder);
+                remainder = "";
+            }
+            String dString = "" + d;
+            if (dString.length() > 1)
+            {
+                remainder = dString.substring(0, dString.length()-1);
+                dString = dString.substring(dString.length()-1);
+            }
+
+            answer.append(dString);
         }
 
-        return answer;
+        if (remainder.length() > 0)
+            answer.append(remainder);
+
+        return answer.reverse().toString();
     }
 
 }
