@@ -8,13 +8,56 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(multiply("22", "155"));
-        System.out.println(multiply("4", "5"));
-        System.out.println(multiply("4", "10"));
-        System.out.println(multiply("123", "456")); //56088
-        System.out.println(multiply("123", "0"));
-        System.out.println(multiply("123456789", "987654321"));
-        System.out.println(multiply("103", "98")); // 10094
+//        System.out.println(multiply("22", "155"));
+//        System.out.println(multiply("4", "5"));
+//        System.out.println(multiply("4", "10"));
+//        System.out.println(multiply("123", "456")); //56088
+//        System.out.println(multiply("123", "0"));
+//        System.out.println(multiply("123456789", "forge987654321"));
+        System.out.println(multiply2("103", "98")); // 10094
+    }
+
+    public static String multiply2(String num1, String num2)
+    {
+        if (num1 == null || num1.length() == 0 || num2 == null || num2.length() == 0)
+            return "";
+        if ( num1.equals("0") || num2.equals("0"))
+            return "0";
+
+        StringBuilder answer = new StringBuilder();
+        num1 = new StringBuilder(num1).reverse().toString();
+        num2 = new StringBuilder(num2).reverse().toString();
+
+        List<List<String>> answers = new ArrayList<>();
+
+        for (int i = 0; i < num1.length(); i++)
+        {
+            List<String> line = new ArrayList<>();
+            Integer digit = Integer.parseInt(num1.substring(i,i+1));
+            for (int k = 0; k < i; k++)
+                line.add("0");
+
+            List<String> subline = new ArrayList<>();
+            for (int j = 0; j < num2.length(); j++)
+            {
+                String dig = "";
+                for (int k = 0; k < j; k++)
+                    dig += "0";
+
+                Integer digit2 = Integer.parseInt(num2.substring(j,j+1) + dig);
+                subline.add("" + digit * digit2);
+            }
+
+            int digitGetter = 0;
+            while (true)
+            {
+
+            }
+
+//            answers.add(line);
+        }
+
+        return answer.reverse().toString();
     }
 
     public static String multiply(String num1, String num2)
