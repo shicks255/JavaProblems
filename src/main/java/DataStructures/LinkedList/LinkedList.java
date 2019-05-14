@@ -16,15 +16,16 @@ public class LinkedList<T>
     @Override
     public String toString()
     {
-        String stringVersion = "List Front --> Back: ";
-
-        Node root = this.root;
-        while (root != null)
-        {
-            stringVersion += root.data;
-            root = root.next;
-        }
-        return stringVersion;
+//        String stringVersion = "List Front --> Back: ";
+//
+//        Node root = this.root;
+//        while (root != null)
+//        {
+//            stringVersion += root.data;
+//            root = root.next;
+//        }
+//        return stringVersion;
+        return "";
     }
 
     public void addToEnd(T value)
