@@ -6,6 +6,8 @@ public class Driver
     {
 //        findMiddleOnePass();
 //        System.out.println(detectCycle());
+//        reverseList();
+        reverseListRecursion();
     }
 
     public static void test()
@@ -129,4 +131,61 @@ public class Driver
 
         return false;
     }
+
+    public static void reverseList()
+    {
+        LinkedList<Integer> linkedList = new LinkedList<>(1);
+        linkedList.addToEnd(2);
+        linkedList.addToEnd(3);
+        linkedList.addToEnd(4);
+        linkedList.addToEnd(5);
+        linkedList.addToEnd(6);
+
+        System.out.println("Before reverse " + linkedList);
+
+        Node head = linkedList.root;
+        Node current = null;
+        Node previous = null;
+        while (head != null)
+        {
+            current = new Node(head.data);
+            head = head.next;
+
+            current.next = previous;
+            previous = current;
+        }
+
+        linkedList.root = current;
+
+        System.out.println("after reverse " + linkedList);
+    }
+
+    public static void reverseListRecursion()
+    {
+        LinkedList<Integer> linkedList = new LinkedList<>(1);
+        linkedList.addToEnd(2);
+        linkedList.addToEnd(3);
+        linkedList.addToEnd(4);
+        linkedList.addToEnd(5);
+        linkedList.addToEnd(6);
+
+        System.out.println("Before reverse " + linkedList);
+
+        linkedList.root = reverseRecursively(null, linkedList.root);
+
+        System.out.println("After reverse " + linkedList);
+    }
+
+    private static Node reverseRecursively(Node previous, Node node)
+    {
+        if (node == null)
+            return previous;
+
+        Node next = node.next;
+        node.next = previous;
+
+        return reverseRecursively(node, next);
+    }
+
+
 }
