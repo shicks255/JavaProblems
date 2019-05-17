@@ -4,7 +4,6 @@ public class Stack<T>
 {
     Node top;
 
-
     public Stack(T item)
     {
         Node n = new Node(item);
@@ -29,15 +28,18 @@ public class Stack<T>
     public void push(T item)
     {
         Node newNode = new Node(item);
+        newNode.data = item;
         if (top == null)
             top = newNode;
-
-        Node temp = top;
-        top = newNode;
-        top.next = temp;
+        else
+        {
+            Node temp = top;
+            top = newNode;
+            top.next = temp;
+        }
     }
 
-    public Node pop()
+    public Node<T> pop()
     {
         Node temp = null;
         try
@@ -51,6 +53,11 @@ public class Stack<T>
         }
 
         return temp;
+    }
+
+    public boolean isEmpty()
+    {
+        return top == null;
     }
 
 }

@@ -1,5 +1,7 @@
 package DataStructures.LinkedList;
 
+import DataStructures.Stack.Stack;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -13,7 +15,8 @@ public class Driver
 //        reverseListRecursion();
 //        removeDuplicates();
 //        findLength();
-        findKFromEnd(1);
+//        findKFromEnd(1);
+        sumUsingStack();
     }
 
     public static void test()
@@ -265,4 +268,48 @@ public class Driver
 
         System.out.println("The " + k + "th node from the end is " + kth);
     }
+
+    public static void sumUsingStack()
+    {
+        LinkedList<Integer> list1 = new LinkedList<>(1);
+        list1.addToEnd(3);
+        list1.addToEnd(5);
+
+        LinkedList<Integer> list2 = new LinkedList<>(1);
+        list2.addToEnd(5);
+        list2.addToEnd(11);
+
+        Stack<Integer> stack = new Stack<>(0);
+        stack.pop();
+
+        Node<Integer> one = list1.root;
+        Node<Integer> two = list2.root;
+
+        while (one != null || two != null)
+        {
+            if (one != null)
+            {
+                stack.push(one.data);
+                one = one.next;
+            }
+            if (two != null)
+            {
+                stack.push(two.data);
+                two = two.next;
+            }
+        }
+
+        int answer = 0;
+        while (!stack.isEmpty())
+        {
+            DataStructures.Stack.Node<Integer> t = stack.pop();
+            answer += t.getData();
+        }
+
+        System.out.println(list1);
+        System.out.println("+");
+        System.out.println(list2);
+        System.out.println("= " + answer);
+    }
+
 }

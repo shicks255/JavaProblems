@@ -21,7 +21,7 @@ public class LinkedList<T>
         Node root = this.root;
         while (root != null)
         {
-            stringVersion += root.data;
+            stringVersion += root.data + ",";
             root = root.next;
         }
         return stringVersion;
