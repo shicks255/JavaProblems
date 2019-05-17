@@ -1,5 +1,8 @@
 package DataStructures.LinkedList;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Driver
 {
     public static void main(String[] args)
@@ -7,7 +10,10 @@ public class Driver
 //        findMiddleOnePass();
 //        System.out.println(detectCycle());
 //        reverseList();
-        reverseListRecursion();
+//        reverseListRecursion();
+//        removeDuplicates();
+//        findLength();
+        findKFromEnd(1);
     }
 
     public static void test()
@@ -187,5 +193,76 @@ public class Driver
         return reverseRecursively(node, next);
     }
 
+    private static void removeDuplicates()
+    {
+        LinkedList<Integer> linkedList = new LinkedList<>(1);
+        linkedList.addToEnd(2);
+        linkedList.addToEnd(3);
+        linkedList.addToEnd(3);
+        linkedList.addToEnd(4);
+        linkedList.addToEnd(5);
+        linkedList.addToEnd(4);
+        linkedList.addToEnd(6);
+        linkedList.addToEnd(6);
+        System.out.println(linkedList);
 
+        Set<Integer> set = new HashSet<>();
+
+        Node temp = new Node(null);
+        temp.next = linkedList.root;
+        Node next = temp.next;
+        while (next != null)
+        {
+            if (!set.add((Integer)next.data))
+                temp.next = next.next;
+
+            temp = next;
+            next = next.next;
+        }
+        System.out.println(linkedList);
+    }
+
+    public static void findLength()
+    {
+        LinkedList<Integer> list = new LinkedList<>(1);
+        list.addToEnd(2);
+        list.addToEnd(3);
+        list.addToEnd(4);
+        list.addToEnd(5);
+        list.addToEnd(6);
+
+        int counter = 0;
+        Node root = list.root;
+        while (root != null)
+        {
+            counter++;
+            root = root.next;
+        }
+
+        System.out.println(counter);
+    }
+
+    public static void findKFromEnd(int k)
+    {
+        LinkedList<Integer> list = new LinkedList<>(1);
+        list.addToEnd(2);
+        list.addToEnd(3);
+        list.addToEnd(4);
+        list.addToEnd(5);
+
+        System.out.println(list);
+
+        Node counterNode = list.root;
+        for (int i = k; i > 0 && counterNode != null; i--)
+            counterNode = counterNode.next;
+
+        Node kth = list.root;
+        while (counterNode != null)
+        {
+            kth = kth.next;
+            counterNode = counterNode.next;
+        }
+
+        System.out.println("The " + k + "th node from the end is " + kth);
+    }
 }
