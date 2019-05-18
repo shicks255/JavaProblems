@@ -1,16 +1,14 @@
 package DataStructures.Array;
 
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Set;
-import java.util.Spliterator;
+import java.util.*;
 
 public class Driver
 {
     public static void main(String[] args)
     {
 //        findMissingNumber();
-        findDuplicates();
+//        findDuplicates();
+        removeDuplicates();
     }
 
     public static void findMissingNumber()
@@ -41,20 +39,10 @@ public class Driver
         int[] numbers = new int[]{1,2,4,4,5,3,7,8,9,11,11};
 
         Set<Integer> ints = new LinkedHashSet<>();
-        int nonDupSize = 0;
         for (int num : numbers)
-        {
-            if (ints.add(num))
-                nonDupSize++;
-        }
+            ints.add(num);
 
-        int[] numbers2 = new int[nonDupSize];
-        Spliterator<Integer> split = ints.spliterator();
-        int counter = 0;
-        while (split.tryAdvance(x -> {
-            numbers[counter] = x;
-            counter++;
-        }));
-
+        Integer[] numbers2 = ints.toArray(new Integer[ints.size()]);
+        System.out.println(Arrays.toString(numbers2));
     }
 }
