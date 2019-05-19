@@ -8,7 +8,8 @@ public class Driver
     {
 //        findMissingNumber();
 //        findDuplicates();
-        removeDuplicates();
+//        removeDuplicates();
+        reverse();
     }
 
     public static void findMissingNumber()
@@ -44,5 +45,25 @@ public class Driver
 
         Integer[] numbers2 = ints.toArray(new Integer[ints.size()]);
         System.out.println(Arrays.toString(numbers2));
+    }
+
+    public static void reverse()
+    {
+        int[] numbers = new int[]{1,2,4,4,5,3,7,8,9,11,11};
+
+        int start = 0;
+        int end = numbers.length-1;
+
+        while (start < end)
+        {
+            int temp = numbers[start];
+            numbers[start] = numbers[end];
+            numbers[end] = temp;
+
+            start++;
+            end--;
+        }
+
+        System.out.println(Arrays.toString(numbers));
     }
 }
