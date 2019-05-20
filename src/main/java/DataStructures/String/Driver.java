@@ -1,5 +1,6 @@
 package DataStructures.String;
 
+import java.awt.event.PaintEvent;
 import java.util.*;
 
 public class Driver
@@ -9,7 +10,8 @@ public class Driver
 //        printDuplicates();
 //        checkAnagrams();
 //        printFirstNonRepeated();
-        reveseStringRecursion();
+//        reveseStringRecursion();
+        findAllPermutations();
     }
 
     public static void printDuplicates()
@@ -75,4 +77,36 @@ public class Driver
 
         return reverse(s.substring(1)) + s.substring(0,1);
     }
+
+    public static void findAllPermutations()
+    {
+        String test = "abc";
+        List<String> answer = new ArrayList<>();
+        permutate(test.toCharArray(), 0, answer);
+        System.out.println(answer);
+    }
+
+    private static void permutate(char[] s, int index, List<String> permutes)
+    {
+        if (index == s.length-1)
+        {
+            permutes.add(Arrays.toString(s));
+            return;
+        }
+
+        for (int i = index; i < s.length-1; i++)
+        {
+            swap(s, i, i+1);
+            permutate(s, i+1, permutes);
+            swap(s, i, i+1);
+        }
+    }
+
+    private static void swap(char[] c, int from, int to)
+    {
+        char temp = c[from];
+        c[from] = c[to];
+        c[to] = temp;
+    }
+
 }
