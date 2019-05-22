@@ -8,9 +8,53 @@ public class MergeSort
     {
         int[] array = new int[]{5,4,1,2,3, 8,7,55,1,4,3,6,99};
         System.out.println(Arrays.toString(array));
-        sort(array, 0, array.length-1);
+        sort2(array, 0, array.length-1);
 
         System.out.println(Arrays.toString(array));
+    }
+
+    public static void sort2(int[] array, int start, int end)
+    {
+        if (start >= end)
+            return;
+
+        int mid = (end+start)/2;
+        sort2(array, start, mid);
+        sort2(array, mid+1, end);
+        mergeHalves2(array, start, end);
+    }
+
+    public static void mergeHalves2(int[] array, int start, int end)
+    {
+        int mid = (end+start)/2;
+
+        int tempSizeLeft = mid-start+1;
+        int tempSizeRight = end-mid;
+
+        int[] tempLeft = new int[tempSizeLeft];
+        int[] tempRight = new int[tempSizeRight];
+
+        for (int i = 0; i < tempSizeLeft; i++)
+            tempLeft[i] = array[start+i];
+        for (int i = 0; i < tempSizeRight; i++)
+            tempRight[i] = array[mid+1+i];
+
+        int l = 0;
+        int r = 0;
+        int i = start;
+
+        while (l < tempSizeLeft && r < tempSizeRight)
+        {
+            if (tempLeft[l] <= tempRight[r])
+                array[i++] = tempLeft[l++];
+            else
+                array[i++] = tempRight[r++];
+        }
+
+        while (l < tempSizeLeft)
+            array[i++] = tempLeft[l++];
+        while (r < tempSizeRight)
+            array[i++] = tempRight[r++];
     }
 
 
