@@ -10,10 +10,39 @@ public class QuickSort
         QuickSort quickSort = new QuickSort();
 
         int[] array1 = new int[]{11,5,4,6,9,15,12,1,2,3};
-        int[] array2 = new int[]{5,4,3,2,1,0};
+        int[] array2 = new int[]{4,1,6,5,3};
 
-        System.out.println(Arrays.toString(quickSort.sort(array1, 0, array1.length-1)));
+        System.out.println(Arrays.toString(quickSort.sort2(array2, 0, array2.length-1)));
+    }
 
+    public int[] sort2(int[] array, int left, int right)
+    {
+        if (right - left > 0)
+        {
+            int pivot = pivot2(array, left, right);
+            sort2(array, left, pivot-1);
+            sort2(array, pivot, right);
+        }
+
+        return array;
+    }
+
+    public int pivot2(int[] array, int left, int right)
+    {
+        while (left < right)
+        {
+            if (array[left] > array[right])
+            {
+                //now swap left and one before pivot, then pivot and one before pivot
+                swap(array, left, right-1);
+                swap(array, right, right-1);
+                right--;
+            }
+            else
+                left++;
+        }
+
+        return right;
     }
 
     public int[] sort(int[] array, int low, int high)
@@ -58,6 +87,13 @@ public class QuickSort
         pivot = low;
 
         return pivot;
+    }
+
+    private void swap(int[] array, int swap1, int swap2)
+    {
+        int temp = array[swap1];
+        array[swap1] = array[swap2];
+        array[swap2] = temp;
     }
 
 }
