@@ -6,13 +6,64 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,3}, {2,6}, {8,10}, {15,18}})));
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,4}, {4,5}})));
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,4},{0,4}})));
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,4},{1,5}})));
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,4},{0,0}})));
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,4},{0,1}})));
-        System.out.println(Arrays.deepToString(merge2(new int[][]{{1,4},{0,2},{3,5}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,3}, {2,6}, {8,10}, {15,18}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4}, {4,5}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,4}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{1,5}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,0}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,1}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,2},{3,5}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{4,5},{1,4},{0,1}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{2,3},{4,5},{6,7},{8,9},{1,10}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,3}})));
+        System.out.println(Arrays.deepToString(merge3(new int[][]{{2,3}, {2,2}, {3,3}, {1,3}, {5,7}, {2,2}, {4,6}})));
+    }
+
+    public static int[][] merge3(int[][] intervals)
+    {
+        if (intervals.length < 2)
+            return intervals;
+
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+        Deque<int[]> stack = new ArrayDeque<>();
+
+        stack.addLast(intervals[0]);
+
+        for (int i = 1; i < intervals.length; i++)
+        {
+            int[] test = intervals[i];
+            int[] fromStack = stack.peekLast();
+
+            if (test[0] > fromStack[1])
+                stack.addLast(test);
+            else
+            {
+                if (test[0] < fromStack[0])
+                {
+                    fromStack[0] = test[1];
+                    stack.pollLast();
+                    stack.addLast(fromStack);
+                }
+                if (test[1] > fromStack[1])
+                {
+                    fromStack[1] = test[1];
+                    stack.pollLast();
+                    stack.addLast(fromStack);
+                }
+            }
+        }
+
+        int[][] answer = new int[stack.size()][2];
+        int counter = 0;
+        while (!stack.isEmpty())
+        {
+            int[] sta = stack.pollFirst();
+            answer[counter][0] = sta[0];
+            answer[counter][1] = sta[1];
+            counter++;
+        }
+        return answer;
     }
 
     public static int[][] merge2(int[][] intervals)
@@ -39,19 +90,14 @@ public class Solution
             }
             else
             {
+                while (queue.peekFirst() != null && queue.peekFirst()[0] <= next[1])
+                    next = queue.pollFirst();
+
                 temp.add(Integer.min(current[0], next[0]));
                 temp.add(Integer.max(current[1], next[1]));
                 tempAnswer.add(temp);
                 current = queue.pollFirst();
             }
-
-//            if (queue.isEmpty())
-//            {
-//                temp = new ArrayList<>();
-//                temp.add(next[0]);
-//                temp.add(next[1]);
-//                tempAnswer.add(temp);
-//            }
         }
 
         if (current != null)
