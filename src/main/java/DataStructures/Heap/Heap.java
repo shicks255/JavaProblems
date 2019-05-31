@@ -155,6 +155,11 @@ public class Heap
             return temp;
         }
 
+        public int peek()
+        {
+            return heap[0];
+        }
+
         public void heapifyUp()
         {
             int indexToTest = capacity-1;
