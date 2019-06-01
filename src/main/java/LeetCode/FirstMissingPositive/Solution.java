@@ -11,11 +11,11 @@ public class Solution
     {
         System.out.println(firstMissingPositive(new int[]{1,2,0}));
         System.out.println(firstMissingPositive(new int[]{3,4,-1,1}));
-//        System.out.println(firstMissingPositive(new int[]{7,8,9,11,12}));
-//        System.out.println(firstMissingPositive(new int[]{}));
-//        System.out.println(firstMissingPositive(new int[]{1}));
-//        System.out.println(firstMissingPositive(new int[]{1,2,3}));
-//        System.out.println(firstMissingPositive(new int[] {0,2,2,1,1}));
+        System.out.println(firstMissingPositive(new int[]{7,8,9,11,12}));
+        System.out.println(firstMissingPositive(new int[]{}));
+        System.out.println(firstMissingPositive(new int[]{1}));
+        System.out.println(firstMissingPositive(new int[]{1,2,3}));
+        System.out.println(firstMissingPositive(new int[] {0,2,2,1,1}));
     }
 
     public static int firstMissingPositive(int[] nums)
@@ -32,23 +32,30 @@ public class Solution
 
         Integer largest = null;
         int checker = (Integer)heap.remove();
-        if (checker != 1)
-            return 1;
-        else
+        if (checker == 1)
         {
+            int tempLargest = checker+1;
             while (largest == null && !heap.isEmpty())
             {
-                int current = (Integer)heap.remove();
-                if (checker++ < current)
-                    largest = checker;
+                checker = (Integer)heap.remove();
+                if (tempLargest < checker)
+                    largest = tempLargest;
+                if (tempLargest > checker)
+                    continue;
+                else
+                    tempLargest+=1;
             }
+
             if (largest == null)
-                largest = checker+1;
+                largest = tempLargest;
         }
+        else
+            return 1;
 
         return largest;
     }
 
+    //this is close but no cigar
     public static int firstMissingPositive2(int[] nums)
     {
         Heap.MinHeap h = new Heap.MinHeap();
