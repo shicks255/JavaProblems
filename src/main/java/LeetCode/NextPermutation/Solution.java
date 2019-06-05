@@ -6,7 +6,7 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        int[] nums = new int[]{1,3,2}; // 213
+        int[] nums = new int[]{1,2,3,4,5}; // 213
         nextPermutation(nums);
         System.out.println(Arrays.toString(nums));
     }
@@ -18,11 +18,6 @@ public class Solution
             largestOutOfOrder--;
 
         if (largestOutOfOrder <= 0)
-        {
-            swap(nums, nums.length-1, nums.length-2);
-            return;
-        }
-        if (largestOutOfOrder == nums.length-1)
         {
             reverse(nums, 0, nums.length-1);
             return;
