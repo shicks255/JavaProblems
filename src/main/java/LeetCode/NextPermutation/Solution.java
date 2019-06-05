@@ -6,34 +6,43 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        int[] nums = new int[]{2,1,3}; // 213
+        int[] nums = new int[]{1,3,2}; // 213
         nextPermutation(nums);
         System.out.println(Arrays.toString(nums));
     }
 
     public static void nextPermutation(int[] nums)
     {
+        int largestOutOfOrder = nums.length-1;
+        while (largestOutOfOrder > 0 && nums[largestOutOfOrder-1] >= nums[largestOutOfOrder])
+            largestOutOfOrder--;
 
-        if (nums[nums.length-1] > nums[nums.length-2])
-            swap(nums, nums.length-1, nums.length-2);
-        else
+        if (largestOutOfOrder <= 0)
         {
-
+            swap(nums, nums.length-1, nums.length-2);
+            return;
         }
+        if (largestOutOfOrder == nums.length-1)
+        {
+            reverse(nums, 0, nums.length-1);
+            return;
+        }
+
+        int pivot = nums.length-1;
+        while (nums[pivot] <= nums[largestOutOfOrder-1])
+            pivot--;
+
+        swap(nums, pivot, largestOutOfOrder-1);
+        reverse(nums, largestOutOfOrder, nums.length-1);
     }
 
-//    public static void nextPermutation(int[] nums)
-//    {
-//        permute(nums, nums.length-1);
-//    }
-
-    public static void permute(int[] nums, int length)
+    private static void reverse(int[] nums, int from, int to)
     {
-        for (int i = 0; i <= length; i++)
+        while (from < to)
         {
-            swap(nums, 0, length);
-            permute(nums, length-1);
-            swap(nums, 0, length);
+            swap(nums, from, to);
+            from++;
+            to--;
         }
     }
 
