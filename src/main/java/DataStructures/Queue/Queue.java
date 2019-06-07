@@ -17,8 +17,8 @@ public class Queue<T>
         Node temp = this.front;
         while (temp != null)
         {
-            info.append("[" + temp.data + "]");
-            temp = temp.next;
+            info.append("[" + temp.getData() + "]");
+            temp = temp.getNext();
         }
 
         return info.toString();
@@ -33,19 +33,24 @@ public class Queue<T>
         else
         {
             Node temp = front;
-            while (temp.next != null)
-                temp = temp.next;
+            while (temp.getNext() != null)
+                temp = temp.getNext();
 
-            temp.next = newNode;
+            temp.setNext(newNode);
         }
     }
 
     public Node dequeue()
     {
         Node temp = front;
-        this.front = temp.next;
+        this.front = temp.getNext();
 
         return temp;
+    }
+
+    public boolean isEmpty()
+    {
+        return front == null;
     }
 
 }
