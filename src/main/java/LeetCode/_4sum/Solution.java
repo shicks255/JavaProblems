@@ -24,10 +24,12 @@ public class Solution
 {
     public static void main(String[] args)
     {
-
+        int[] nums = new int[]{1,0,-1,0,-2,2};
+        List<List<Integer>> answer = fourSum(nums, 0);
+        System.out.println(answer);
     }
 
-    public List<List<Integer>> fourSum(int[] nums, int target)
+    public static List<List<Integer>> fourSum(int[] nums, int target)
     {
 
 
