@@ -1,5 +1,8 @@
 package DataStructures.BinaryTree;
 
+import java.util.ArrayDeque;
+import java.util.Deque;
+
 public class BinarySearchTree<T extends Comparable>
 {
     Node<T> root;
@@ -15,7 +18,7 @@ public class BinarySearchTree<T extends Comparable>
         Node temp = root;
         if (temp != null)
         {
-            return toString(temp, "");
+            return toString(temp);
         }
         return "";
     }
@@ -30,6 +33,29 @@ public class BinarySearchTree<T extends Comparable>
             info += toString(node.right, soFar);
 
         return info;
+    }
+
+    public String toString(Node node)
+    {
+        StringBuilder answer = new StringBuilder();
+        Deque<Node> deque = new ArrayDeque();
+        deque.add(node);
+        int lineSeparator = 1;
+        int lines = 1;
+        while (!deque.isEmpty())
+        {
+
+            Node<Integer> nod = deque.poll();
+            answer.append(" " + nod.data + " ");
+            if (nod.left != null)
+                deque.add(nod.left);
+            if (nod.right != null)
+                deque.add(nod.right);
+
+            lines++;
+        }
+
+        return answer.toString();
     }
 
     public void add(T data)
