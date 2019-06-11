@@ -18,23 +18,40 @@
 
 package LeetCode._4sum;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Solution
 {
     public static void main(String[] args)
     {
-        int[] nums = new int[]{1,0,-1,0,-2,2};
+        int[] nums = new int[]{1,0,-1,0,-2,2}; // -2,-1,0,0,1,2
         List<List<Integer>> answer = fourSum(nums, 0);
         System.out.println(answer);
     }
 
     public static List<List<Integer>> fourSum(int[] nums, int target)
     {
+        List<List<Integer>> answer = new ArrayList<>();
+        Arrays.sort(nums);
 
+        for (int i = 0; i < nums.length-4; i++)
+        {
+            int dif = Math.abs(target-nums[i]);
+            int start = i+1;
+
+            while (start < nums.length-4)
+            {
+
+            }
+
+        }
 
         return null;
     }
+
+
 
 
 }
