@@ -118,6 +118,57 @@ public class BinarySearchTree<T extends Comparable>
         return null;
     }
 
+    public void remove2(T value)
+    {
+        remove(root, value);
+    }
+
+    public Node<T> remove(Node root, T value)
+    {
+        if (value == null)
+            return null;
+        if (value.compareTo(root.data) < 0)
+        {
+            root.left = remove(root.left, value);
+            return root;
+        }
+        else if (value.compareTo(root.data) > 0)
+        {
+            root.right = remove(root.right, value);
+            return root;
+        }
+        else
+        {
+            if (root.left == null && root.right == null)
+                return null;
+            if (root.left == null && root.right != null)
+                return root.right;
+            if (root.left != null && root.right == null)
+                return root.left;
+            else
+            {
+                if (root.right != null)
+                {
+                    Node tempSmallest = root.right;
+                    while (tempSmallest != null)
+                    {
+                        if (tempSmallest.left == null)
+                        {
+                            root.data = tempSmallest.data;
+                            root.right = remove(root.right, (T)root.data);
+                            return root;
+                        }
+                        tempSmallest = tempSmallest.left;
+                    }
+
+                }
+            }
+        }
+
+        return null;
+    }
+
+
     public Node remove(T value)
     {
         Node temp = root;

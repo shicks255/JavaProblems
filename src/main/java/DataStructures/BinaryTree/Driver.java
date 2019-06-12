@@ -17,11 +17,18 @@ public class Driver
         tree.add(15);
         tree.add(13);
 
-        tree.remove(11);
+        System.out.println(tree);
+
+        tree.remove2(5);
+        System.out.println(tree);
+        tree.remove2(11);
+        System.out.println(tree);
+        tree.remove2(4);
+        System.out.println(tree);
+
 //        tree.remove(1);
 
 
         System.out.println(tree.contains(4));
-        System.out.println(tree.toString());
     }
 }
