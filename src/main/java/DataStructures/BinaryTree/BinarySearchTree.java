@@ -1,7 +1,9 @@
 package DataStructures.BinaryTree;
 
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class BinarySearchTree<T extends Comparable>
 {
@@ -118,6 +120,39 @@ public class BinarySearchTree<T extends Comparable>
         return null;
     }
 
+    public Node<T> rebalance()
+    {
+        List<Node> inOrderList = new ArrayList<>();
+        preOrder(root, inOrderList);
+
+        root = rebalance(inOrderList, 0, inOrderList.size()-1);
+        return root;
+    }
+
+    public void preOrder(Node node, List<Node> list)
+    {
+        if (node == null)
+            return;
+
+        preOrder(node.left, list);
+        list.add(node);
+        preOrder(node.right, list);
+    }
+
+    public Node rebalance(List<Node> list, int start, int end)
+    {
+        if (start > end)
+            return null;
+
+        int mid = (start+end)/2;
+
+        Node root = list.get(mid);
+        root.left = rebalance(list, start, mid-1);
+        root.right = rebalance(list, mid+1, end);
+
+        return root;
+    }
+
     public void remove2(T value)
     {
         remove(root, value);
@@ -160,7 +195,6 @@ public class BinarySearchTree<T extends Comparable>
                         }
                         tempSmallest = tempSmallest.left;
                     }
-
                 }
             }
         }
