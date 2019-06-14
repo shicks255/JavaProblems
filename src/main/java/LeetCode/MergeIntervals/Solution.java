@@ -6,19 +6,59 @@ public class Solution
 {
     public static void main(String[] args)
     {
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,3}, {2,6}, {8,10}, {15,18}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4}, {4,5}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,4}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{1,5}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,0}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,1}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,4},{0,2},{3,5}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{4,5},{1,4},{0,1}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{2,3},{4,5},{6,7},{8,9},{1,10}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{1,3}})));
-        System.out.println(Arrays.deepToString(merge3(new int[][]{{2,3}, {2,2}, {3,3}, {1,3}, {5,7}, {2,2}, {4,6}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,3}, {2,6}, {8,10}, {15,18}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,4}, {4,5}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,4},{0,4}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,4},{1,5}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,4},{0,0}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,4},{0,1}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,4},{0,2},{3,5}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{4,5},{1,4},{0,1}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{2,3},{4,5},{6,7},{8,9},{1,10}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{1,3}})));
+        System.out.println(Arrays.deepToString(merge4(new int[][]{{2,3}, {2,2}, {3,3}, {1,3}, {5,7}, {2,2}, {4,6}})));
     }
+
+    public static int[][] merge4(int[][] intervals)
+    {
+        if (intervals.length == 0)
+            return new int[][]{};
+
+        Arrays.sort(intervals, Comparator.comparingInt(o -> o[0]));
+
+        Deque<int[]> stack = new ArrayDeque<>();
+        stack.push(intervals[0]);
+        for (int i = 1; i < intervals.length; i++)
+        {
+            int[] toCheck = intervals[i];
+            int[] temp = stack.peek();
+            if (toCheck[0] > temp[1])
+                stack.push(toCheck);
+            else
+            {
+                int[] toChange = stack.pop();
+                if (toCheck[0] < toChange[0])
+                    toChange[0] = toCheck[0];
+                if (toCheck[1] > toChange[1])
+                    toChange[1] = toCheck[1];
+
+                stack.push(toChange);
+            }
+        }
+
+        int[][] answer = new int[stack.size()][2];
+        int stackSize = stack.size();
+        for (int i = stackSize-1; i >= 0; i--)
+        {
+            int[] popped = stack.pop();
+            answer[i][0] = popped[0];
+            answer[i][1] = popped[1];
+        }
+
+        return answer;
+    }
+
 
     public static int[][] merge3(int[][] intervals)
     {
