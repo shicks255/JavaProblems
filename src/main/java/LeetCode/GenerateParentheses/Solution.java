@@ -21,6 +21,7 @@ public class Solution
 
     public static void dfs(int n, String soFar, List<String> answer, int open, int close)
     {
+        System.out.println(soFar);
         if (soFar.length() == (n*2))
         {
             answer.add(soFar);
