@@ -9,7 +9,6 @@ public class Solution
     {
         LinkedList<Integer> linkedList = new LinkedList<>(1);
 
-
         Node head = linkedList.root;
         Node newHead = swapPairs(head);
         System.out.println(newHead);
